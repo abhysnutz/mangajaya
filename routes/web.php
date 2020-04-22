@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+
+
+Route::get('/', function() {
     return view('welcome');
 });
+
+// melakukan grab pada daftar manga (DB MANGA)
+Route::get('/grab/daftarmanga', 'GrabController@daftarManga');
+// melakukan grab pada detail manga (DB DETAIL MANGA)
+Route::get('/grab/detaildaftarmanga', 'GrabController@detailDaftarManga');
+// melakukan grab pada detail spoiler image (DB SPOILER IMAGE)
+Route::get('/grab/detailspoilerimage', 'GrabController@detailSpoilerImage');
+
+// DAFTAR KOMIK
+Route::get('/daftar-komik', 'MangaController@daftarManga');
+
 
 Auth::routes();
 
