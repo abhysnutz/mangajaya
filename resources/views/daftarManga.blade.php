@@ -7,8 +7,8 @@
     <meta name="robots" content="all">
     <title>Daftar Komik - Komiku</title>
     <meta name="description" content="Daftar Komik terlengkap yang tersedia di Komiku, semua berbahasa Indonesia dengan kualitas gambar HD.">
-    <meta name="google-site-verification" content="-7mnNLp_bkQmElA8T0yP4o1Akoixf7OpiK52_B4sCpk">
-    <meta name="propeller" content="e5a0c8cbdd07c2c0e0056db72d0cddf5">
+    <!-- <meta name="google-site-verification" content="-7mnNLp_bkQmElA8T0yP4o1Akoixf7OpiK52_B4sCpk"> -->
+    <!-- <meta name="propeller" content="e5a0c8cbdd07c2c0e0056db72d0cddf5"> -->
     <link rel="icon" href="https://komiku.co.id/wp-content/uploads/2020/02/Baca-Komik.png">
     <link rel="dns-prefetch" href="https://i0.wp.com/">
     <link rel="dns-prefetch" href="https://iklan.komiku.co.id/">
@@ -196,6 +196,12 @@
             }
         });
     </script>
+    <script>
+    function linkFilter(id)
+        {
+            document.getElementById("abc").href = id;
+        }
+    </script>
     <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
     <main class="perapih">
         <section style="margin-bottom:0px;border-top:0;width:calc(100% - 30px)">
@@ -205,477 +211,49 @@
             </div>
             <div class="filter" style="margin:0;margin-bottom: 30px">
                 <p> Filter berdasarkan manga, manhwa, atau manhua? Bisa kalian pilih di bawah ini: </p>
-                <form class="filer2" action="">
-                    <select name="cat" id="filter" class="formfiler">
-                        <option class="level-1" value="0">Default (Manga, Manhua, Manhwa)</option>
-                        <option class="level-1" value="manga">Manga</option>
-                        <option class="level-1" value="manhua">Manhua (China)</option>
-                        <option class="level-1" value="manhwa">Manhwa (Korea)</option>
+                <form class="filer2" action="#">
+                    <select id="filter" class="formfiler" onchange="linkFilter(this.value)">
+                        <option <?php echo (Request::segment(3) == null ? 'selected' : ''); ?> class="level-1" value="{{url('daftar-komik')}}">Default (Manga, Manhua, Manhwa)</option>
+                        <option <?php echo (Request::segment(3) == 'manga' ? 'selected' : ''); ?> class="level-1" value="{{url('daftar-komik/kategori/manga')}}">Manga</option>
+                        <option <?php echo (Request::segment(3) == 'manhua' ? 'selected' : ''); ?> class="level-1" value="{{url('daftar-komik/kategori/manhua')}}">Manhua (China)</option>
+                        <option <?php echo (Request::segment(3) == 'manhwa' ? 'selected' : ''); ?> class="level-1" value="{{url('daftar-komik/kategori/manhwa')}}">Manhwa (Korea)</option>
                     </select>
-                    <input class="filter3" value="Filter" type="submit"> </form>
+                </form>
+                <a href="#" id="abc">
+                    <input type="submit" class="filter3" value="Filter" style="position: relative; top: -9px;"> 
+                </a>
+              
+
+                
+
+
             </div>
             <div id="animelist">
                 <div id="a-z">
+                    
+                    <!-- LOOPING CHAR-->
+                    @foreach($char as $key => $charList)
                     <ol>
-                        <div class="letter-cell"><a name=".">.</a></div>
+                        <div class="letter-cell"><a name="{{$charList}}">{{$charList}}</a></div>
                         <div class="row-cells"> </div>
+
+                        <!-- LOOPING MANGA -->
+                        @foreach($manga[$key] as $mangaList)
                         <div class="row-cells">
                             <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/hack-g-u/" title="Komik .hack//G.U.+"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-hackGU.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-hackGU.jpg?resize=55,66&amp;q=60" alt="Komik .hack//G.U.+">
-                                    <h4> .hack//G.U.+ </h4>
-                                    <div class="kategori">Manga Fantasi </div>
+                                <a href="{{url('manga/'.$mangaList->slug_manga)}}" title="Komik {{$mangaList->nama_manga}}"> 
+                                <img src="{{url('/storage/komik/sampul_detail/'.$mangaList->slug_manga.'.jpg')}}" alt="Komik {{$mangaList->nama_manga}}">
+                                    <h4> {{$mangaList->nama_manga}} </h4>
+                                    <div class="kategori">{{$mangaList->jenis_manga}} {{$mangaList->konsep_cerita}} </div>
                                 </a>
                             </li>
                         </div>
+                        @endforeach
+                        <!-- END LOOPING MANGA -->
+
                     </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="+">+</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/c-sword-and-cornett-2/" title="Komik +C: Sword and Cornett"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-C-Sword-and-Cornett.png?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-C-Sword-and-Cornett.png?resize=55,66&amp;q=60" alt="Komik +C: Sword and Cornett">
-                                    <h4> +C: Sword and Cornett </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="0">0</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/07-ghost/" title="Komik 07 Ghost"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-07-Ghost.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-07-Ghost.jpg?resize=55,66&amp;q=60" alt="Komik 07 Ghost">
-                                    <h4> 07 Ghost </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/090-eko-to-issho/" title="Komik 090 Eko to Issho"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-090-Eko-to-Issho.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-090-Eko-to-Issho.jpg?resize=55,66&amp;q=60" alt="Komik 090 Eko to Issho">
-                                    <h4> 090 Eko to Issho </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="1">1</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/1-nen-a-gumi-no-monster/" title="Komik 1-nen A-gumi no Monster"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-1-nen-A-gumi-no-Monster.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-1-nen-A-gumi-no-Monster.jpg?resize=55,66&amp;q=60" alt="Komik 1-nen A-gumi no Monster">
-                                    <h4> 1-nen A-gumi no Monster </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/1-2-prince/" title="Komik 1/2 Prince"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-12-Prince.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-12-Prince.jpg?resize=55,66&amp;q=60" alt="Komik 1/2 Prince">
-                                    <h4> 1/2 Prince </h4>
-                                    <div class="kategori">Manhwa Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/100-man-no-inochi-no-ue-ni-ore-wa-tatteiru/" title="Komik 100-man no Inochi no Ue ni Ore wa Tatteiru"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-100-man-no-Inochi-no-Ue-ni-Ore-wa-Tatteiru.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-100-man-no-Inochi-no-Ue-ni-Ore-wa-Tatteiru.jpg?resize=55,66&amp;q=60" alt="Komik 100-man no Inochi no Ue ni Ore wa Tatteiru">
-                                    <h4> 100-man no Inochi no Ue ni Ore wa Tatteiru </h4>
-                                    <div class="kategori">Manga Isekai </div>
-                                </a>
-                            </li>
-                        </div>
-                      
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="2">2</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/2-kaime-no-hajimete-no-koi/" title="Komik 2 Kaime no Hajimete no Koi"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-2-Kaime-no-Hajimete-no-Koi.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-2-Kaime-no-Hajimete-no-Koi.jpg?resize=55,66&amp;q=60" alt="Komik 2 Kaime no Hajimete no Koi">
-                                    <h4> 2 Kaime no Hajimete no Koi </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/29-to-jk/" title="Komik 29 to JK"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-29-to-JK.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-29-to-JK.jpg?resize=55,66&amp;q=60" alt="Komik 29 to JK">
-                                    <h4> 29 to JK </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/29-sai-dokushin-wa-isekai-de-jiyuu-ni-ikitakatta/" title="Komik 29-sai Dokushin wa Isekai de Jiyuu ni Ikita……katta"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-29-sai-Dokushin-wa-Isekai-de-Jiyuu-ni-Ikitakatta.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-29-sai-Dokushin-wa-Isekai-de-Jiyuu-ni-Ikitakatta.jpg?resize=55,66&amp;q=60" alt="Komik 29-sai Dokushin wa Isekai de Jiyuu ni Ikita……katta">
-                                    <h4> 29-sai Dokushin wa Isekai de Jiyuu ni Ikita……katta </h4>
-                                    <div class="kategori">Manga Isekai </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="4">4</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/4-cut-hero/" title="Komik 4 Cut Hero"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-4-Cut-Hero.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-4-Cut-Hero.jpg?resize=55,66&amp;q=60" alt="Komik 4 Cut Hero">
-                                    <h4> 4 Cut Hero </h4>
-                                    <div class="kategori">Manhwa Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="6">6</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/6-worlds-of-cultivation/" title="Komik 6 Worlds of Cultivation"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-6-Worlds-of-Cultivation.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-6-Worlds-of-Cultivation.jpg?resize=55,66&amp;q=60" alt="Komik 6 Worlds of Cultivation">
-                                    <h4> 6 Worlds of Cultivation </h4>
-                                    <div class="kategori">Manhwa Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="7">7</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/7th-garden/" title="Komik 7th Garden"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-7th-Garden.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-7th-Garden.jpg?resize=55,66&amp;q=60" alt="Komik 7th Garden">
-                                    <h4> 7th Garden </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="A">A</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/a-bias-girl/" title="Komik A Bias Girl"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Bias-Girl.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Bias-Girl.jpg?resize=55,66&amp;q=60" alt="Komik A Bias Girl">
-                                    <h4> A Bias Girl </h4>
-                                    <div class="kategori">Manhwa Komedi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/a-callous-chairmans-summer/" title="Komik A Callous Chairman’s Summer"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Callous-Chairmans-Summer.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Callous-Chairmans-Summer.jpg?resize=55,66&amp;q=60" alt="Komik A Callous Chairman’s Summer">
-                                    <h4> A Callous Chairman’s Summer </h4>
-                                    <div class="kategori">Manhua Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/a-capable-maid/" title="Komik A Capable Maid"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manhwa-A-Capable-Maid.jpeg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manhwa-A-Capable-Maid.jpeg?resize=55,66&amp;q=60" alt="Komik A Capable Maid">
-                                    <h4> A Capable Maid </h4>
-                                    <div class="kategori">Manhwa Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/a-channel/" title="Komik A Channel"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Channel.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-A-Channel.jpg?resize=55,66&amp;q=60" alt="Komik A Channel">
-                                    <h4> A Channel </h4>
-                                    <div class="kategori">Manga Komedi </div>
-                                </a>
-                            </li>
-                        </div>
-                        
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/ajin/" title="Komik Ajin"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ajin.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ajin.jpg?resize=55,66&amp;q=60" alt="Komik Ajin">
-                                    <h4> Ajin </h4>
-                                    <div class="kategori">Manga Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/akaaka-to-shita-chi-no-monogatari/" title="Komik Akaaka to Shita Chi no Monogatari"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akaaka-to-Shita-Chi-no-Monogatari.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akaaka-to-Shita-Chi-no-Monogatari.jpg?resize=55,66&amp;q=60" alt="Komik Akaaka to Shita Chi no Monogatari">
-                                    <h4> Akaaka to Shita Chi no Monogatari </h4>
-                                    <div class="kategori">Manga Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/akame-ga-kill/" title="Komik Akame ga Kill!"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akame-ga-Kill.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akame-ga-Kill.jpg?resize=55,66&amp;q=60" alt="Komik Akame ga Kill!">
-                                    <h4> Akame ga Kill! </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/akarui-sekai-keikaku/" title="Komik Akarui Sekai Keikaku"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akarui-Sekai-Keikaku.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akarui-Sekai-Keikaku.jpg?resize=55,66&amp;q=60" alt="Komik Akarui Sekai Keikaku">
-                                    <h4> Akarui Sekai Keikaku </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/akatsuki-no-yona/" title="Komik Akatsuki no Yona"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akatsuki-no-Yona.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Akatsuki-no-Yona.jpg?resize=55,66&amp;q=60" alt="Komik Akatsuki no Yona">
-                                    <h4> Akatsuki no Yona </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/akb49/" title="Komik AKB49"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-AKB49.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-AKB49.jpg?resize=55,66&amp;q=60" alt="Komik AKB49">
-                                    <h4> AKB49 </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/ake-no-tobari/" title="Komik Ake no Tobari"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ake-no-Tobari.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ake-no-Tobari.jpg?resize=55,66&amp;q=60" alt="Komik Ake no Tobari">
-                                    <h4> Ake no Tobari </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                      
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/auto-hunting/" title="Komik Auto Hunting"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/manhwa-Auto-Hunting.png?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/manhwa-Auto-Hunting.png?resize=55,66&amp;q=60" alt="Komik Auto Hunting">
-                                    <h4> Auto Hunting </h4>
-                                    <div class="kategori">Manhwa Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/azur-lane-comic-anthology/" title="Komik Azur Lane Comic Anthology"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Azur-Lane-Comic-Anthology.jpeg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Azur-Lane-Comic-Anthology.jpeg?resize=55,66&amp;q=60" alt="Komik Azur Lane Comic Anthology">
-                                    <h4> Azur Lane Comic Anthology </h4>
-                                    <div class="kategori">Manga Komedi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="B">B</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/baby-steps/" title="Komik Baby Steps"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/04/Manga-Baby-Steps.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/04/Manga-Baby-Steps.jpg?resize=55,66&amp;q=60" alt="Komik Baby Steps">
-                                    <h4> Baby Steps </h4>
-                                    <div class="kategori">Manga Olahraga </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/bakuman/" title="Komik Bakuman"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Bakuman.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Bakuman.jpg?resize=55,66&amp;q=60" alt="Komik Bakuman">
-                                    <h4> Bakuman </h4>
-                                    <div class="kategori">Manga Drama </div>
-                                </a>
-                            </li>
-                        </div>
-                     
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/boukensha-license-o-hakudatsu-sareta-ossan-dakedo-manamusume-ga-dekita-no-de-nonbiri-jinsei/" title="Komik Boukensha License o Hakudatsu Sareta Ossan Dakedo, Manamusume ga Dekita no de Nonbiri Jinsei"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Manga-Boukensha-License-o-Hakudatsu-Sareta-Ossan-Dakedo-Manamusume-ga-Dekita-no-de-Nonbiri-Jinsei.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Manga-Boukensha-License-o-Hakudatsu-Sareta-Ossan-Dakedo-Manamusume-ga-Dekita-no-de-Nonbiri-Jinsei.jpg?resize=55,66&amp;q=60" alt="Komik Boukensha License o Hakudatsu Sareta Ossan Dakedo, Manamusume ga Dekita no de Nonbiri Jinsei">
-                                    <h4> Boukensha License o Hakudatsu Sareta Ossan Dakedo, Manamusume ga Dekita no de Nonbiri Jinsei </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/bullet-armors/" title="Komik Bullet Armors"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Bullet-Armors.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Bullet-Armors.jpg?resize=55,66&amp;q=60" alt="Komik Bullet Armors">
-                                    <h4> Bullet Armors </h4>
-                                    <div class="kategori">Manga Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/bungou-stray-dogs/" title="Komik Bungou Stray Dogs"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Manga-Bungou-Stray-Dogs.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Manga-Bungou-Stray-Dogs.jpg?resize=55,66&amp;q=60" alt="Komik Bungou Stray Dogs">
-                                    <h4> Bungou Stray Dogs </h4>
-                                    <div class="kategori">Manga Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/busou-shoujo-machiavellianism/" title="Komik Busou Shoujo Machiavellianism"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/01/Manga-Busou-Shoujo-Machiavellianism.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/01/Manga-Busou-Shoujo-Machiavellianism.jpg?resize=55,66&amp;q=60" alt="Komik Busou Shoujo Machiavellianism">
-                                    <h4> Busou Shoujo Machiavellianism </h4>
-                                    <div class="kategori">Manga Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="C">C</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/carrying-the-goddess-along/" title="Komik Carrying The Goddess Along"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manhua-Carrying-The-Goddess-Along.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manhua-Carrying-The-Goddess-Along.jpg?resize=55,66&amp;q=60" alt="Komik Carrying The Goddess Along">
-                                    <h4> Carrying The Goddess Along </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/celestial-jailer/" title="Komik Celestial Jailer"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manhua-Celestial-Jailer.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manhua-Celestial-Jailer.jpg?resize=55,66&amp;q=60" alt="Komik Celestial Jailer">
-                                    <h4> Celestial Jailer </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/ceos-sudden-proposal/" title="Komik CEO’s Sudden Proposal"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manhua-CEO’s-Sudden-Proposal.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manhua-CEO’s-Sudden-Proposal.jpg?resize=55,66&amp;q=60" alt="Komik CEO’s Sudden Proposal">
-                                    <h4> CEO’s Sudden Proposal </h4>
-                                    <div class="kategori">Manhua Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                       
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="D">D</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/da-xiang-wuxing/" title="Komik Da Xiang Wuxing"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Da-Xiang-Wuxing.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Da-Xiang-Wuxing.jpg?resize=55,66&amp;q=60" alt="Komik Da Xiang Wuxing">
-                                    <h4> Da Xiang Wuxing </h4>
-                                    <div class="kategori">Manhua Horor </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/danshi-koukousei-wo-yashinaitai-onee-san-no-hanashi/" title="Komik Danshi Koukousei wo Yashinaitai Onee-san no Hanashi"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2018/08/Manga-Danshi-Koukousei-wo-Yashinaitai-Onee-san-no-Hanashi..jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2018/08/Manga-Danshi-Koukousei-wo-Yashinaitai-Onee-san-no-Hanashi..jpg?resize=55,66&amp;q=60" alt="Komik Danshi Koukousei wo Yashinaitai Onee-san no Hanashi">
-                                    <h4> Danshi Koukousei wo Yashinaitai Onee-san no Hanashi </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/dare-ga-yonda-no-isekai-to-game-dzukuri-to-recruit-shoukan/" title="Komik Dare ga Yonda no!? ~Isekai to Game-dzukuri to Recruit Shoukan~"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dare-ga-Yonda-no-Isekai-to-Game-dzukuri-to-Recruit-Shoukan.png?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dare-ga-Yonda-no-Isekai-to-Game-dzukuri-to-Recruit-Shoukan.png?resize=55,66&amp;q=60" alt="Komik Dare ga Yonda no!? ~Isekai to Game-dzukuri to Recruit Shoukan~">
-                                    <h4> Dare ga Yonda no!? ~Isekai to Game-dzukuri to Recruit Shoukan~ </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/dark-energy-engine/" title="Komik Dark Energy Engine"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dark-Energy-Engine.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dark-Energy-Engine.jpg?resize=55,66&amp;q=60" alt="Komik Dark Energy Engine">
-                                    <h4> Dark Energy Engine </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/dark-tale/" title="Komik Dark Tale"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dark-Tale.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dark-Tale.jpg?resize=55,66&amp;q=60" alt="Komik Dark Tale">
-                                    <h4> Dark Tale </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/darwins-game/" title="Komik Darwins Game"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Darwins-Game.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Darwins-Game.jpg?resize=55,66&amp;q=60" alt="Komik Darwins Game">
-                                    <h4> Darwins Game </h4>
-                                    <div class="kategori">Manga Fiksi Sains </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/dazzling-prince/" title="Komik Dazzling Prince!"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dazzling-Prince.png?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dazzling-Prince.png?resize=55,66&amp;q=60" alt="Komik Dazzling Prince!">
-                                    <h4> Dazzling Prince! </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/death-note-special/" title="Komik Death Note Special"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manga-Death-Note-Special.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Manga-Death-Note-Special.jpg?resize=55,66&amp;q=60" alt="Komik Death Note Special">
-                                    <h4> Death Note Special </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/demand-killer/" title="Komik Demand Killer"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manhua-Demand-Killer.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manhua-Demand-Killer.jpg?resize=55,66&amp;q=60" alt="Komik Demand Killer">
-                                    <h4> Demand Killer </h4>
-                                    <div class="kategori">Manhua Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/demi-gods-and-semi-devils/" title="Komik Demi-Gods and Semi-Devils"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/04/Manhua-Demi-Gods-and-Semi-Devils.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/04/Manhua-Demi-Gods-and-Semi-Devils.jpg?resize=55,66&amp;q=60" alt="Komik Demi-Gods and Semi-Devils">
-                                    <h4> Demi-Gods and Semi-Devils </h4>
-                                    <div class="kategori">Manhua Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/desolate-era/" title="Komik Desolate Era"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Desolate-Era.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Desolate-Era.jpg?resize=55,66&amp;q=60" alt="Komik Desolate Era">
-                                    <h4> Desolate Era </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/destroy-all-humankind-they-cant-be-regenerated/" title="Komik Destroy All Humankind. They Can’t Be Regenerated"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Destroy-All-Humankind-They-Cant-Be-Regenerated.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Destroy-All-Humankind-They-Cant-Be-Regenerated.jpg?resize=55,66&amp;q=60" alt="Komik Destroy All Humankind. They Can’t Be Regenerated">
-                                    <h4> Destroy All Humankind. They Can’t Be Regenerated </h4>
-                                    <div class="kategori">Manga Romantis </div>
-                                </a>
-                            </li>
-                        </div>
-                        
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/dushi-zhizun/" title="Komik Dushi Zhizun"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dushi-Zhizun.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dushi-Zhizun.jpg?resize=55,66&amp;q=60" alt="Komik Dushi Zhizun">
-                                    <h4> Dushi Zhizun </h4>
-                                    <div class="kategori">Manhua Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                    </ol>
-                    <ol>
-                        <div class="letter-cell"><a name="E">E</a></div>
-                        <div class="row-cells"> </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/e-rank-no-kusushi/" title="Komik E Rank no Kusushi"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/07/Manga-E-Rank-no-Kusushi.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/07/Manga-E-Rank-no-Kusushi.jpg?resize=55,66&amp;q=60" alt="Komik E Rank no Kusushi">
-                                    <h4> E Rank no Kusushi </h4>
-                                    <div class="kategori">Manga Fantasi </div>
-                                </a>
-                            </li>
-                        </div>
-                        <div class="row-cells">
-                            <li class="ranking1">
-                                <a href="https://komiku.co.id/manga/eden-game/" title="Komik Eden Game"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Eden-Game.jpg?resize=55,66&amp;q=60" class="lazy" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Eden-Game.jpg?resize=55,66&amp;q=60" alt="Komik Eden Game">
-                                    <h4> Eden Game </h4>
-                                    <div class="kategori">Manhua Aksi </div>
-                                </a>
-                            </li>
-                        </div>
-                       
-                    </ol>
-                   
+                    @endforeach
+                    <!-- END LOOPING CHAR -->
                 </div>
             </div>
         </section>

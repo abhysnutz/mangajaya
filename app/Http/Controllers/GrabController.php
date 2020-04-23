@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Goutte;
 use DB;
+use Storage;
 
 class GrabController extends Controller
 {
@@ -90,6 +91,73 @@ class GrabController extends Controller
         // echo "<pre>";
         // var_dump($image);
         // echo "</pre>";
+        
+    }
+
+    // GAMBAR UTAMA
+    public function detailImage($awal, $akhir){
+        for ($i=$awal; $i <= $akhir; $i++) { 
+            
+            $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
+
+            $crawler = Goutte::request('GET', $mangalist[0]->link_manga);
+
+            $image = $crawler->filter('.ims img')->each(function ($node) {
+                return $node->attr("src");
+            });
+            
+            Storage::put('public/komik/sampul_detail/'.$mangalist[0]->slug_manga.'.jpg', file_get_contents($image[0]));
+            echo $i. " ".$mangalist[0]->slug_manga. " ".$image[0]."<br>";
+        }
+    }
+
+    // GAMBAR BACKGROUND
+    public function detailImageBackground($awal, $akhir){
+        for ($i=$awal; $i <= $akhir; $i++) { 
+            
+            $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
+
+            $crawler = Goutte::request('GET', $mangalist[0]->link_manga);
+
+            $imageBackground = $crawler->filter('style')->each(function ($node) {
+                return $node->html();
+            });
+            
+            $url = explode(");}}", explode("url(", $imageBackground[0])[1])[0];
+            
+            Storage::put('public/komik/background_detail/'.$mangalist[0]->slug_manga.'.jpg', file_get_contents($url));
+            echo $i. " ".$mangalist[0]->slug_manga. " ".$url."<br>";
+
+
+        }
+
+        // echo "<pre>";
+        // var_dump($url);
+        // echo "</pre>";
+    }
+
+     // GAMBAR BACKGROUND
+     public function daftarKomikImage($id_manga){
+    
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/daftar-komik/');
+
+        $daftarImage = $crawler->filter('.ranking1 img')->each(function ($node) {
+            return $node->attr("data-src");
+        });
+        
+        
+        // echo $i. " ".$mangalist[0]->slug_manga. " ".$url."<br>";
+        
+        foreach ($daftarImage as $key => $daftarImageList) {
+           $id = $key + 1;
+            if ($id >= $id_manga) {
+                $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $id)->get();
+
+                Storage::put('public/komik/daftarKomikImage/'.$mangalist[0]->slug_manga.'.jpg', file_get_contents($daftarImageList));
+                echo $id.$mangalist[0]->slug_manga."<br>";
+            }
+
+        }
         
     }
 }
