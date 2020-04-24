@@ -6,6 +6,8 @@
         <div class="nav_apb"> <a href="#%23">#</a> <a href="#A">A</a> <a href="#B">B</a> <a href="#C">C</a> <a href="#D">D</a> <a href="#E">E</a> <a href="#F">F</a> <a href="#G">G</a> <a href="#H">H</a> <a href="#I">I</a> <a href="#J">J</a> <a href="#K">K</a> <a href="#L">L</a> <a href="#M">M</a> <a href="#N">N</a> <a href="#O">O</a> <a href="#P">P</a> <a href="#Q">Q</a> <a href="#R">R</a> <a href="#S">S</a> <a href="#T">T</a> <a href="#U">U</a> <a href="#V">V</a> <a href="#W">W</a> <a href="#X">X</a> <a href="#Y">Y</a> <a href="#Z">Z</a>
             <div class="clear"></div>
         </div>
+
+        <!-- FILTER JENIS MANGA -->
         <div class="filter" style="margin:0;margin-bottom: 30px">
             <p> Filter berdasarkan manga, manhwa, atau manhua? Bisa kalian pilih di bawah ini: </p>
             <form class="filer2" action="#">
@@ -19,12 +21,10 @@
             <a href="#" id="abc">
                 <input type="submit" class="filter3" value="Filter" style="position: relative; top: -9px;"> 
             </a>
-            
-
-            
-
-
         </div>
+        <!-- END FILTER JENIS MANGA -->
+
+
         <div id="animelist">
             <div id="a-z">
                 
@@ -55,5 +55,5 @@
         </div>
     </section>
     <div style="clear:both;"></div>
-    
+
 @endsection

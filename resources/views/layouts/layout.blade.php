@@ -204,10 +204,15 @@
         }
     </script>
     <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
+
+    <!-- KONTEN -->
     <main class="perapih">
-     @yield('konten')
+        @yield('konten')
     </main>
-        <footer>
+    <!-- END KONTEN -->
+
+
+    <footer>
         <div class="footer perapih">
             <div class="kn">
                 <p> Komiku.co.id website baca komik gratis dengan lebih dari 1000 judul komik mulai dari Manga, Manhwa, dan Manhua. </p>

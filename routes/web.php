@@ -37,6 +37,10 @@ Route::get('/grab/detailimagebackground/{awal}/{akhir}', 'GrabController@detailI
 Route::get('/daftar-komik/kategori/{nama_kategori}', 'MangaController@daftarMangaFilterKategori');
 // DAFTAR KOMIK
 Route::get('/daftar-komik', 'MangaController@daftarManga');
+// DETAIL KOMIK
+Route::get('/manga/{slug_manga}', 'MangaController@detailManga');
+// DAFTAR GENRE
+Route::get('/daftar-genre', 'MangaController@daftarGenre');
 
 
 
