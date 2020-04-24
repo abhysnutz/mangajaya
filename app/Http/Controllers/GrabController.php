@@ -66,6 +66,22 @@ class GrabController extends Controller
         }
     }
 
+    public function viewsDetailDaftarManga(){
+        for ($i=101; $i <= 1000; $i++) { 
+        
+            $mangalist = DB::table('manga')->select('id_manga', 'link_manga')->where('id_manga', $i)->get();
+
+            $crawler = Goutte::request('GET', $mangalist[0]->link_manga);
+
+            $detail = $crawler->filter('.inftable td')->each(function ($node) {
+                return $node->text();
+            });
+            
+            DB::table('detail_manga')->where('id_detail_manga', $i)
+                                     ->update(['views' => $detail[15]]);
+        }
+    }
+
     public function detailSpoilerImage(){
         for ($i=1000; $i <= 1000; $i++) { 
             $no = 1;
@@ -127,13 +143,7 @@ class GrabController extends Controller
             
             Storage::put('public/komik/background_detail/'.$mangalist[0]->slug_manga.'.jpg', file_get_contents($url));
             echo $i. " ".$mangalist[0]->slug_manga. " ".$url."<br>";
-
-
         }
-
-        // echo "<pre>";
-        // var_dump($url);
-        // echo "</pre>";
     }
 
      // GAMBAR BACKGROUND
@@ -143,22 +153,40 @@ class GrabController extends Controller
 
         $daftarImage = $crawler->filter('.ranking1 img')->each(function ($node) {
             return $node->attr("data-src");
-        });
-        
+        });       
         
         // echo $i. " ".$mangalist[0]->slug_manga. " ".$url."<br>";
         
         foreach ($daftarImage as $key => $daftarImageList) {
            $id = $key + 1;
             if ($id >= $id_manga) {
-                $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $id)->get();
+                $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')
+                                               ->where('id_manga', $id)
+                                               ->get();
 
                 Storage::put('public/komik/daftarKomikImage/'.$mangalist[0]->slug_manga.'.jpg', file_get_contents($daftarImageList));
                 echo $id.$mangalist[0]->slug_manga."<br>";
             }
-
         }
-        
     }
 
+    public function detailGenre($awal, $akhir){
+        
+        for ($i=$awal; $i <= $akhir; $i++) { 
+            
+            $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
+
+            $crawler = Goutte::request('GET', $mangalist[0]->link_manga);
+
+            $genre = $crawler->filter('.genre')->each(function ($node) {
+                return $node->text();
+            });
+
+            foreach($genre as $key => $genreList){
+                if($key != 0){
+                    echo $mangalist[0]->id_manga." ".$genreList."<br>";
+                }
+            }
+        }
+    }
 }

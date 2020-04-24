@@ -31,6 +31,11 @@ Route::get('/grab/detailimage/{awal}/{akhir}', 'GrabController@detailImage');
 Route::get('/grab/daftarkomikimage/{id_manga}', 'GrabController@daftarKomikImage');
 // melakukan grab pada image detail Background
 Route::get('/grab/detailimagebackground/{awal}/{akhir}', 'GrabController@detailImageBackground');
+// melakukan grab pada genre komik
+Route::get('/grab/detailgenre/{awal}/{akhir}', 'GrabController@detailGenre');
+// melakukan grab pada views manga (DB DETAIL MANGA)
+Route::get('/grab/viewsdetaildaftarmanga', 'GrabController@viewsDetailDaftarManga');
+
 
 
 // DAFTAR KOMIK BERDASARKAN KATEGORI
@@ -38,9 +43,11 @@ Route::get('/daftar-komik/kategori/{nama_kategori}', 'MangaController@daftarMang
 // DAFTAR KOMIK
 Route::get('/daftar-komik', 'MangaController@daftarManga');
 // DETAIL KOMIK
-Route::get('/manga/{slug_manga}', 'MangaController@detailManga');
+Route::get('/manga/{slug_manga}', 'MangaController@detailManga')->name('detailManga');
 // DAFTAR GENRE
 Route::get('/daftar-genre', 'MangaController@daftarGenre');
+// DETAIL GENRE
+Route::get('/genre/{slug_genre}', 'MangaController@detailGenre')->name('detailGenre');
 
 
 
