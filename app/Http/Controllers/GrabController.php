@@ -104,10 +104,6 @@ class GrabController extends Controller
                 $no = $no + 1;
             }
         }
-        // echo "<pre>";
-        // var_dump($image);
-        // echo "</pre>";
-        
     }
 
     // GAMBAR UTAMA
@@ -186,6 +182,52 @@ class GrabController extends Controller
                 if($key != 0){
                     echo $mangalist[0]->id_manga." ".$genreList."<br>";
                 }
+            }
+        }
+    }
+
+
+
+    // OTHER
+    public function otherMangaBerwarna($page){
+        // $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/other/berwarna/page/'.$page);
+
+        $manga = $crawler->filter('h3')->each(function ($node) {
+            return $node->text();
+        });
+
+        foreach($manga as $mangaList){
+            $namaMangaCount = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->count();
+            
+            if($namaMangaCount != 0){
+                $namaManga = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->get();
+                
+                DB::table('other')->where('id_other_manga', $namaManga[0]->id_manga)
+                                     ->update(['berwarna' => 1]);
+                echo $namaManga[0]->id_manga."<br>";
+            }
+            
+        }
+    }
+
+    public function otherMangaRekomendasi($page){
+        // $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/other/rekomendasi/page/'.$page);
+
+        $manga = $crawler->filter('h3')->each(function ($node) {
+            return $node->text();
+        });
+
+        foreach($manga as $mangaList){
+            $namaMangaCount = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->count();
+            
+            if($namaMangaCount != 0){
+                $namaManga = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->get();
+                
+                DB::table('other')->where('id_other_manga', $namaManga[0]->id_manga)
+                                     ->update(['rekomendasi' => 1]);
+                echo $namaManga[0]->id_manga."<br>";
             }
         }
     }

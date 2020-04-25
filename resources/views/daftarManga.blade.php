@@ -24,7 +24,6 @@
         </div>
         <!-- END FILTER JENIS MANGA -->
 
-
         <div id="animelist">
             <div id="a-z">
                 
@@ -51,7 +50,7 @@
                 </ol>
                 @endforeach
                 <!-- END LOOPING CHAR -->
-                
+
             </div>
         </div>
     </section>

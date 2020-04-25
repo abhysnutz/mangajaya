@@ -36,6 +36,11 @@ Route::get('/grab/detailgenre/{awal}/{akhir}', 'GrabController@detailGenre');
 // melakukan grab pada views manga (DB DETAIL MANGA)
 Route::get('/grab/viewsdetaildaftarmanga', 'GrabController@viewsDetailDaftarManga');
 
+// GRAB OtHER
+// melakukan grab warna berwarna (DB OTHER MANGA)
+Route::get('/grab/othermangaberwarna/{page}', 'GrabController@otherMangaBerwarna');
+// melakukan grab warna rekomendasi (DB OTHER MANGA)
+Route::get('/grab/othermangarekomendasi/{page}', 'GrabController@otherMangaRekomendasi');
 
 
 // DAFTAR KOMIK BERDASARKAN KATEGORI
