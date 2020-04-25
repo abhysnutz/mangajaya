@@ -190,7 +190,6 @@ class GrabController extends Controller
 
     // OTHER
     public function otherMangaBerwarna($page){
-        // $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
         $crawler = Goutte::request('GET', 'https://komiku.co.id/other/berwarna/page/'.$page);
 
         $manga = $crawler->filter('h3')->each(function ($node) {
@@ -211,8 +210,8 @@ class GrabController extends Controller
         }
     }
 
+    // OTHER REKOMENDASI
     public function otherMangaRekomendasi($page){
-        // $mangalist = DB::table('manga')->select('id_manga', 'slug_manga', 'link_manga')->where('id_manga', $i)->get();
         $crawler = Goutte::request('GET', 'https://komiku.co.id/other/rekomendasi/page/'.$page);
 
         $manga = $crawler->filter('h3')->each(function ($node) {
@@ -227,6 +226,27 @@ class GrabController extends Controller
                 
                 DB::table('other')->where('id_other_manga', $namaManga[0]->id_manga)
                                      ->update(['rekomendasi' => 1]);
+                echo $namaManga[0]->id_manga."<br>";
+            }
+        }
+    }
+
+    // OTHER HOT
+    public function otherMangaHot($page){
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/other/hot/page/'.$page);
+
+        $manga = $crawler->filter('h3')->each(function ($node) {
+            return $node->text();
+        });
+
+        foreach($manga as $mangaList){
+            $namaMangaCount = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->count();
+            
+            if($namaMangaCount != 0){
+                $namaManga = DB::table('manga')->select('id_manga', 'nama_manga')->where('nama_manga', $mangaList)->get();
+                
+                DB::table('other')->where('id_other_manga', $namaManga[0]->id_manga)
+                                     ->update(['hot' => 1]);
                 echo $namaManga[0]->id_manga."<br>";
             }
         }

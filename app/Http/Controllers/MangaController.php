@@ -95,7 +95,7 @@ class MangaController extends Controller
                                                            ->get();
 
         return view('detailGenre')->with([
-                                            'detailKategoriManga' => $detailKategoriManga[0],
+                                            'detailKategoriManga' => $detailKategoriManga,
                                         ]);;
 
         // echo "<pre>";

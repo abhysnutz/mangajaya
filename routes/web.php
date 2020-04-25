@@ -36,11 +36,13 @@ Route::get('/grab/detailgenre/{awal}/{akhir}', 'GrabController@detailGenre');
 // melakukan grab pada views manga (DB DETAIL MANGA)
 Route::get('/grab/viewsdetaildaftarmanga', 'GrabController@viewsDetailDaftarManga');
 
-// GRAB OtHER
-// melakukan grab warna berwarna (DB OTHER MANGA)
+// GRAB OTHER
+// melakukan grab other berwarna (DB OTHER MANGA)
 Route::get('/grab/othermangaberwarna/{page}', 'GrabController@otherMangaBerwarna');
-// melakukan grab warna rekomendasi (DB OTHER MANGA)
+// melakukan grab other rekomendasi (DB OTHER MANGA)
 Route::get('/grab/othermangarekomendasi/{page}', 'GrabController@otherMangaRekomendasi');
+// melakukan grab other hot (DB OTHER MANGA)
+Route::get('/grab/othermangahot/{page}', 'GrabController@otherMangaHot');
 
 
 // DAFTAR KOMIK BERDASARKAN KATEGORI
@@ -49,12 +51,22 @@ Route::get('/daftar-komik/kategori/{nama_kategori}', 'MangaController@daftarMang
 Route::get('/daftar-komik', 'MangaController@daftarManga');
 // DETAIL KOMIK
 Route::get('/manga/{slug_manga}', 'MangaController@detailManga')->name('detailManga');
+
+
+// GENRE
 // DAFTAR GENRE
 Route::get('/daftar-genre', 'MangaController@daftarGenre');
 // DETAIL GENRE
 Route::get('/genre/{slug_genre}', 'MangaController@detailGenre')->name('detailGenre');
 
 
+//OTHER LANDING PAGE
+//DAFTAR OTHER HOT
+Route::get('/other/hot', 'OtherController@detaiOtherHot');
+//DAFTAR OTHER REKOMENDASI
+Route::get('/other/rekomendasi', 'OtherController@detaiOtherRekomendasi');
+//DAFTAR OTHER BERWARNA
+Route::get('/other/berwarna', 'OtherController@detaiOtherBerwarna');
 
 Auth::routes();
 

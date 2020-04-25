@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('konten')
     <section style="margin-bottom:0px;border-top:0;width:calc(100% - 30px)">
-        <h1> Komik Genre Cooking </h1>
+        <h1> Komik Genre {{$detailKategoriManga[0]->nama_kategori}} </h1>
         <p class="top1"> Baca komik dengan Genre Cooking terlengkap bahasa Indonesia. Di Komiku kalian bisa membaca Manga Genre Cooking terbaru. </p>
         <!-- <div class="filter">
             <p> Tampilkan berdasarkan jenis komik: </p>
@@ -19,20 +19,27 @@
                 </select>
                 <input class="filter3" value="Filter" type="submit"> </form>
         </div> -->
+        
         <div class="daftar">
+
+            <!-- LOOPING DETAIL GENRE -->
+            @foreach($detailKategoriManga as $detailKategoriMangaList)
             <div class="bge">
-                <a href="{{url('manga/'.$detailKategoriManga->slug_manga)}}" class="popunder">
+                <a href="{{url('manga/'.$detailKategoriMangaList->slug_manga)}}" class="popunder">
                     <div class="bgei">
                         <div class="vw Rekomendasi"> Rekomendasi</div> 
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Tondemo-Skill-de-Isekai-Hourou-Meshi.jpg?resize=300,170&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Tondemo-Skill-de-Isekai-Hourou-Meshi.jpg?resize=300,170&amp;quality=60" class="lazy sd rd">
-                        <div class="tpe1_inf"> <b>{{$detailKategoriManga->jenis_manga}}</b> {{$detailKategoriManga->konsep_cerita}} </div>
+                        <img src="{{url('/storage/komik/background_detail/'.$detailKategoriMangaList->slug_manga.'.jpg')}}" class="sd rd">
+                        <div class="tpe1_inf"> <b>{{$detailKategoriMangaList->jenis_manga}}</b> {{$detailKategoriMangaList->konsep_cerita}} </div>
                     </div>
                     <div class="kan">
-                        <h3> {{$detailKategoriManga->nama_manga}} </h3> <span>232 rb x • 4 minggu lalu</span>
+                        <h3> {{$detailKategoriMangaList->nama_manga}} </h3> <span>{{$detailKategoriMangaList->views}} x • 4 minggu lalu</span>
                         <p> Mukouda dulunya adalah seorang pegawai gaji sampai ia dipanggil secara tidak sengaja ke dunia fantasi. </p>
                     </div>
                 </a>
             </div>
+            @endforeach
+            <!-- END LOOPING -->
+
         </div>
     </section>
 @endsection
