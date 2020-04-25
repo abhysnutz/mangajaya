@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="id" {{Route::currentRouteName() == 'detailManga' ? '' :  (Route::currentRouteName() == 'detailGenre' ? 'class=index terbaru' : 'class=index terbaru daftar')}}>
     <head>
         <meta charset="UTF-8">
@@ -147,7 +148,7 @@
                         <a href="/">
                             <svg class="svg-inline--fa fa-korvue fa-w-14" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="korvue" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 446 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M386.5 34h-327C26.8 34 0 60.8 0 93.5v327.1C0 453.2 26.8 480 59.5 480h327.1c33 0 59.5-26.8 59.5-59.5v-327C446 60.8 419.2 34 386.5 34zM87.1 120.8h96v116l61.8-116h110.9l-81.2 132H87.1v-132zm161.8 272.1l-65.7-113.6v113.6h-96V262.1h191.5l88.6 130.8H248.9z"></path>
-                            </svg><span>Komiku</span></a>
+                                </svg><span>Komiku</span></a>
                     </div>
                     <form class="search_box active" id="search_box" action="/">
                         <select name="post_type" id="searchform_cat" class="postform" style="display:none">
@@ -179,7 +180,7 @@
             </div>
             <nav itemscope="" itemtype="http://www.schema.org/SiteNavigationElement">
                 <ul>
-                    <li itemprop="name"><a itemprop="url" href="/manga/" title="Update Komik Terbaru">Terbaru</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('/manga')}}" title="Update Komik Terbaru">Terbaru</a></li>
                     <li itemprop="name"><a itemprop="url" href="/ikuti/" rel="nofollow">Subscribe <i>(new)</i></a></li>
                     <li itemprop="name"><a itemprop="url" href="{{url('/daftar-komik')}}" title="Daftar Komik">Daftar Komik</a></li>
                     <li itemprop="name"><a itemprop="url" href="{{url('/daftar-genre')}}" title="Daftar Genre">Genre</a></li>
@@ -217,6 +218,25 @@
             }
         </script>
         <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
+        
+        @if(Route::currentRouteName() == 'categoryManga')
+            <a href="{{url('manga/'.$manga[0]->slug_manga)}}" title="Baca {{$manga[0]->jenis_manga}} {{$manga[0]->nama_manga}}">
+                <div class="cv">
+                    <div class="at1">
+                        <div class="perapih">
+                            <div class="prk1">✪ 1</div>
+                            <h3>{{$manga[0]->nama_manga}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <style>
+                .cv {
+                    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.7)), url('{{url('/storage/komik/background_detail/'.$manga[0]->slug_manga.'.jpg')}}');
+                }
+            </style>
+        @endif
+
 
         @if(Route::currentRouteName() == 'detailManga')
             <div class="cv"></div>
@@ -227,7 +247,62 @@
             @yield('konten')
         </main>
         <!-- END KONTEN -->
+        
+        <!-- SCRIPT PAGE -->
+        @if(Route::currentRouteName() == 'categoryManga')
+            <script>
+                function openLink(evt, animName) {
+                    var i, x, tablinks;
+                    x = document.getElementsByClassName("sec");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tab");
+                    for (i = 0; i < x.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" curr", "");
+                    }
+                    document.getElementById(animName).style.display = "block";
+                    evt.currentTarget.className += " curr";
+                }
+                var mybtn = document.getElementsByClassName("def")[0];
+                mybtn.click(); 
+            </script> 
 
+            <script>
+                function openLink2(evt, animName) {
+                    var i, x, tablinks;
+                    x = document.getElementsByClassName("sectipe2");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tabtipe2");
+                    for (i = 0; i < x.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" curr", "");
+                    }
+                    document.getElementById(animName).style.display = "block";
+                    evt.currentTarget.className += " curr";
+                }
+                var mybtn2 = document.getElementsByClassName("def2")[0];
+                mybtn2.click();
+
+                function openLink3(evt, animName) {
+                    var i, x, tablinks;
+                    x = document.getElementsByClassName("sectipe3");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tabtipe3");
+                    for (i = 0; i < x.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" curr", "");
+                    }
+                    document.getElementById(animName).style.display = "block";
+                    evt.currentTarget.className += " curr";
+                }
+                var mybtn3 = document.getElementsByClassName("def3")[0];
+                mybtn3.click(); 
+            </script>
+        @endif
+        <!-- END SCRIPT PAGE -->
 
         <footer>
             @if(Route::currentRouteName() == 'detailManga')
@@ -287,19 +362,19 @@
                             </svg><span>Trending</span></a>
                     </li>
                     <li>
-                        <a href="{{url('daftar-komik/kategori/manga/')}}" title="Baca Manga">
+                        <a href="{{url('category/manga/')}}" title="Baca Manga">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
                             </svg><span>Manga</span></a>
                     </li>
                     <li>
-                        <a href="{{url('daftar-komik/kategori/manhua/')}}" title="Baca Manhua">
+                        <a href="{{url('category/manhua/')}}" title="Baca Manhua">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
                             </svg><span>Manhua</span></a>
                     </li>
                     <li>
-                        <a href="{{url('daftar-komik/kategori/manhwa/')}}" title="Baca Manhwa">
+                        <a href="{{url('category/manhwa/')}}" title="Baca Manhwa">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
                             </svg><span>Manhwa</span></a>

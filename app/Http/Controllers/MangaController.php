@@ -15,6 +15,10 @@ class MangaController extends Controller
         View::share('web_title', $web_title);
     }
 
+    public function index(){
+        // return view('asdf');
+    }
+
     public function daftarManga(){
         $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W' );
         foreach ($char as $abjad) {

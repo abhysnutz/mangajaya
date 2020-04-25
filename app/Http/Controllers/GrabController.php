@@ -8,7 +8,14 @@ use DB;
 use Storage;
 
 class GrabController extends Controller
-{
+{   
+
+    // GRAB PADA MANGA TERBARU
+    public function newManga(){
+        return 'a';
+    }
+
+    // MElAKUKAN GRAB PADA DAFTAR MANGA 
     public function daftarManga(){
         $crawler = Goutte::request('GET', 'https://komiku.co.id/daftar-komik/');
         
@@ -33,7 +40,6 @@ class GrabController extends Controller
                                             'created_at'=> now(), 
                                             'updated_at' => now()
                                         ]);
-
         }
     }
 
