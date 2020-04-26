@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// TRUNCATE
+Route::get('trun', function(){
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    DB::table('detail_manga')->truncate();
+    DB::table('spoiler_image')->truncate();
+    DB::table('chapter')->truncate();
+    DB::table('gambar')->truncate();
+    DB::table('detail_kategori')->truncate();
+    DB::table('manga')->truncate();
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+});
 
 Route::get('/', function() {
     return view('welcome');
