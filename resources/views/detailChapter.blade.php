@@ -46,13 +46,29 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
+                        <?php 
+                            $next = str_replace('.0', '', ($detail_manga->episode_chapter+1));
+                            $prev = str_replace('.0', '', ($detail_manga->episode_chapter-1)); 
+                        ?>
+                  
                         <div class="new new2" style="margin-bottom:0">
-                            <div class="new1 new2 sd" style="background: #4c4c4c;"> 
-                                <a href="https://komiku.co.id/martial-peak-chapter-346/">
-                                    <span>Sebelumnya </span>
-                                    <span>Chapter 346</span>
-                                </a> 
-                            </div>
+                            @if($detail_manga->episode_chapter > $minChapterManga)
+                                <div class="new1 new2 sd" style="background: #4c4c4c; float:left;"> 
+                                    <a href="{{url('manga/'.$detail_manga->slug_manga.'/'.$prev)}}">
+                                        <span>Sebelumnya </span>
+                                        <span>Chapter {{$prev}}</span>
+                                    </a>
+                                </div>
+                            @endif
+                            @if($detail_manga->episode_chapter < $maxChapterManga)
+                                <div class="new1 new2 sd" style="background: #4c4c4c; float:right;">
+                                    <a href="{{url('manga/'.$detail_manga->slug_manga.'/'.$next)}}">
+                                        <span>Selanjutnya </span>
+                                        <span>Chapter {{$next}}</span>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -108,7 +124,7 @@
                         <li>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
-                            </svg> Chapter {{str_replace('.0', '', $detail_manga->episode_chapter)}} dari 347</li>
+                            </svg> Chapter {{str_replace('.0', '', $detail_manga->episode_chapter)}} dari {{str_replace('.0', '', $maxChapterManga)}}</li>
                         <li class="ls1"><a href="{{url('manga/'.$detail_manga->slug_manga)}}" title="Komik {{$detail_manga->nama_manga}}">Daftar Chapter »</a></li>
                     </ul>
                 </div>
@@ -120,15 +136,28 @@
                     </div>
                     <ul class="perapih">
                         <li>
-                            <a href="https://komiku.co.id/martial-peak-chapter-347/?komentar">
+                            <a href="https://komiku.co.id/one-piece-chapter-967/?komentar">
                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="comments" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"></path>
-                                </svg> 26 <span>Komentar</span> <b>+ADD</b></a>
+                                </svg> 3 <span>Komentar</span> <b>+ADD</b>
+                            </a>
                         </li>
-                        <li class="rl"><a href="https://komiku.co.id/manga/martial-peak/" class="rl"><span>Ch. Lanjutan </span></a></li>
+                        @if($detail_manga->episode_chapter < $maxChapterManga)
+                            <li class="rl">
+                                <a href="https://komiku.co.id/one-piece-chapter-968/" class="rl">
+                                    <span> Ch. {{$next}} </span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if($detail_manga->episode_chapter > $minChapterManga)
                         <li class="rl">
-                            <a href="https://komiku.co.id/martial-peak-chapter-346/" class="rl"> <span>Ch. 346</span></a>
+                            <a href="https://komiku.co.id/one-piece-chapter-966-indo/" class="rl"> 
+                                <span> Ch. {{$prev}} </span>
+                            </a>
                         </li>
+                        @endif
+
                     </ul>
                 </div>
 
@@ -186,10 +215,12 @@
                 </div>
             </div>
         </div>
+        
+
         <aside class="ch rd sd" id="Terkait">
-            <div class="df"> <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manhua-Martial-Peak.jpg?resize=23,13&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manhua-Martial-Peak.jpg?resize=230,130&amp;quality=60" alt="Baca Komik Martial Peak" class="asm sd lazy">
-                <h3> Komik Martial Peak </h3>
-                <p> Manhua Martial Peak meripakan sebuah komik yang dikarang oleh Momo &amp; Pikapi bercerita tentang dia melakukan perjalanan ke puncak bela diri adalah yang kesepian, soliter dan panjang. Dalam menghadapi~ </p>
+            <div class="df"> <img src="{{url('/storage/komik/background_detail/'.$detail_manga->slug_manga.'.jpg')}}" alt="Baca Komik Martial Peak" class="asm sd" style="height:130px; width:230px;">
+                <h3> Komik {{$detail_manga->nama_manga}} </h3>
+                <p> {{ explode('</li>', explode('<ul class="rs"> <li>', $detail_manga->sinopsis)[1])[0] }} </p>
                 <table class="chapter" id="Chapter_Lainnya">
                     <tbody class="_3Rsjq" data-test="chapter-table">
                         <tr>

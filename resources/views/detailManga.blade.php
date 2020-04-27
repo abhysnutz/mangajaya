@@ -170,7 +170,9 @@
                                     {{ \Carbon\Carbon::parse($chapterMangaList->updated_at)->diffForHumans() }}  
                                 </time>
                             </td>
-                            <td class="tanggalseries dl"> <a href="https://pdf.komiku.co.id/one-piece-chapter-977/" rel="nofollow" target="_blank">DL</a> </td>
+                            <td class="tanggalseries dl"> 
+                                <a href="#" rel="nofollow" >DL</a> 
+                            </td>
                         </tr>
                     @endforeach
                     <!-- END LOOPING CHAPTER -->

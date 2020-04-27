@@ -13,7 +13,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('tes', function(){
 
+    // $crawler = Goutte::request('GET', 'https://komiku.co.id/manga/sword-sheaths-child/');
+
+    
+    // $imageBackground = $crawler->filter('style')->each(function ($node) {
+    //     return $node->html();
+    // });
+
+    // $url = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageBackground[0])[1])[0]));
+            
+
+    // $abhy = "https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/Komik-Sword-Sheath%E2%80%99s-Child-gambar.jpg";
+// $contents = file_get_contents($url);
+// $name = substr($abhy, strrpos($abhy, '/') + 1);
+// Storage::put($name, $contents);
+    // echo $url;
+
+    // Storage::put('public/komik/background_details/abhy.jpg', $contents);
+    // $path = 'public/komik/background_details/';
+    // Storage::put($path, file_get_contents($url));
+    
+    // echo "<pre>";
+    // echo $url."<br>";
+    // echo $url2;
+    // echo "</pre>";
+    // INSERT IMAGE SAMPUL
+    // Storage::put('public/komik/sampul_detailss/'.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($imageSampul[0]));
+
+});
 // TRUNCATE
 Route::get('trun', function(){
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');

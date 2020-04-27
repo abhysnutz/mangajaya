@@ -82,9 +82,6 @@ class MangaController extends Controller
                                                ->where('manga.slug_manga', $slug_manga)
                                                ->min('episode_chapter');
                     
-        // echo "<pre>";
-        // var_dump($chapterManga);
-        // echo "</pre>";
         return view('detailManga')->with([
                                             'detailManga' => $detailManga[0],
                                             'spoilerImageManga' => $spoilerImageManga,
@@ -114,6 +111,14 @@ class MangaController extends Controller
                                              ->orderBy('manga.updated_at', 'DESC')
                                              ->limit(4)
                                              ->get();
+
+        $maxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                               ->where('manga.slug_manga', $slug_manga)
+                                               ->max('episode_chapter');
+
+        $minChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                               ->where('manga.slug_manga', $slug_manga)
+                                               ->min('episode_chapter');
         // echo "<pre>";
         // var_dump($detail_kategori);
         // echo "</pre>";
@@ -126,7 +131,8 @@ class MangaController extends Controller
                                                 'gambar' => $detail_chapter,
                                                 'detail_kategori' => $detail_kategori,
                                                 'negara' => $negara,
-                                                // 'detailKategoriManga' => $detailKategoriManga,
+                                                'maxChapterManga' => $maxChapterManga,
+                                                'minChapterManga' => $minChapterManga,
                                             ]);
     }
 

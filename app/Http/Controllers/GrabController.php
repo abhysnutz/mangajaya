@@ -129,13 +129,18 @@ class GrabController extends Controller
                     ]);
                 }
 
+
                 // INSERT IMAGE SAMPUL
-                Storage::put('public/komik/sampul_detail/'.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($imageSampul[0]));
+                $urlSampul = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageSampul[0])[1])[0]));
+                $pathSampul = 'public/komik/sampul_detail/';
+                Storage::put($pathSampul.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlsampul));
+
 
                 // INSERT IMAGE BACKGROUND
-                $url = explode(");}}", explode("url(", $imageBackground[0])[1])[0];
-            
-                Storage::put('public/komik/background_detail/'.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($url));
+                // $url = explode(");}}", explode("url(", $imageBackground[0])[1])[0];
+                $urlBackground = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageBackground[0])[1])[0]));
+                $pathBackground = 'public/komik/background_detail/';
+                Storage::put($pathBackground.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlBackground));
 
 
                 // UPDATE OTHER DB
