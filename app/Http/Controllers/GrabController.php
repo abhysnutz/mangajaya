@@ -74,6 +74,7 @@ class GrabController extends Controller
                     return $node->attr("src");
                 });
 
+                // IMAGE BACKGROUND
                 $imageBackground = $crawler->filter('style')->each(function ($node) {
                     return $node->html();
                 });

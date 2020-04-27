@@ -21,6 +21,7 @@ Route::get('trun', function(){
     DB::table('spoiler_image')->truncate();
     DB::table('chapter')->truncate();
     DB::table('gambar')->truncate();
+    DB::table('other')->truncate();
     DB::table('detail_kategori')->truncate();
     DB::table('manga')->truncate();
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -69,6 +70,8 @@ Route::get('/daftar-komik/kategori/{nama_kategori}', 'MangaController@daftarMang
 Route::get('/daftar-komik', 'MangaController@daftarManga');
 // DETAIL KOMIK
 Route::get('/manga/{slug_manga}', 'MangaController@detailManga')->name('detailManga');
+// DETAIL CHAPTER
+Route::get('/manga/{slug_manga}/{episode_chapter}', 'MangaController@detailChapter')->name('detailChapter');
 
 
 // GENRE
