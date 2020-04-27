@@ -2,25 +2,26 @@
 @section('konten')
  
         <section style="margin-bottom:0px;border-bottom:1px solid #ddd">
-            <h1>
-					Baca Manga
-				</h1>
+            <h1> Baca {{$title}} </h1>
+
             <p class="top1">
-                Manga (漫画 manga) adalah komik atau novel grafis yang dibuat di Jepang atau oleh orang yang menggunakan bahasa Jepang dan sesuai dengan gaya yang dikembangkan di Jepang pada akhir abad ke-19. Mereka memiliki pra-sejarah yang panjang dan kompleks dalam seni Jepang sebelumnya.
+                {{$description}}
             </p>
+
             <div id="Populer-1" class="sec" style="display: block;">
 
                 <!-- LOOPING PAGE 1 -->
                 @foreach($manga as $key => $mangaList)
                     @if($key >= 1 && $key <= 5)
                         <div class="at">
-                            <a href="https://komiku.co.id/manga/one-piece/" title="Manga One Piece">
+                            <a href="{{url('/manga/'.$mangaList->slug_manga)}}" title="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <img src="{{url('/storage/komik/sampul_detail/'.$mangaList->slug_manga.'.jpg')}}" alt="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <div class="prk sd">
                                     ★ {{$loop->iteration}} </div>
                                 <h3>
                                 {{$mangaList->nama_manga}}
-                                </h3> {{$mangaList->views}} x • 1 hari lalu
+                                </h3> {{$mangaList->views}} x •
+                                {{ \Carbon\Carbon::parse($mangaList->updated_at)->diffForHumans() }}
                             </a>
                         </div>
                     @endif
@@ -35,13 +36,14 @@
                 @foreach($manga as $key => $mangaList)
                     @if($key >= 6 && $key <= 10)
                         <div class="at">
-                            <a href="https://komiku.co.id/manga/one-piece/" title="Manga One Piece">
+                            <a href="{{url('/manga/'.$mangaList->slug_manga)}}" title="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <img src="{{url('/storage/komik/sampul_detail/'.$mangaList->slug_manga.'.jpg')}}" alt="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <div class="prk sd">
                                     ★ {{$loop->iteration}} </div>
                                 <h3>
                                 {{$mangaList->nama_manga}}
-                                </h3> {{$mangaList->views}} x • 1 hari lalu
+                                </h3> {{$mangaList->views}} x • 
+                                {{ \Carbon\Carbon::parse($mangaList->updated_at)->diffForHumans() }}
                             </a>
                         </div>
                     @endif
@@ -55,13 +57,14 @@
                 @foreach($manga as $key => $mangaList)
                     @if($key >= 11 && $key <= 15)
                         <div class="at">
-                            <a href="https://komiku.co.id/manga/one-piece/" title="Manga One Piece">
+                            <a href="{{url('/manga/'.$mangaList->slug_manga)}}" title="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <img src="{{url('/storage/komik/sampul_detail/'.$mangaList->slug_manga.'.jpg')}}" alt="{{$mangaList->jenis_manga}} {{$mangaList->nama_manga}}">
                                 <div class="prk sd">
                                     ★ {{$loop->iteration}} </div>
                                 <h3>
                                 {{$mangaList->nama_manga}}
-                                </h3> {{$mangaList->views}} x • 1 hari lalu
+                                </h3> {{$mangaList->views}} x •
+                                {{ \Carbon\Carbon::parse($mangaList->updated_at)->diffForHumans() }}
                             </a>
                         </div>
                     @endif
@@ -75,97 +78,80 @@
             <button class="tab" onclick="openLink(event, 'Populer-2')">7-11</button>
             <button class="tab" onclick="openLink(event, 'Populer-3')">12-16</button>
         </div>
+        
         <section>
             <div class="h2">
                 <h2>
-					Komik Jepang Terpopuler 2019
-					</h2>
+					Komik {{$negara}} Terpopuler 2019
+				</h2>
             </div>
+
             <div class="clr">
                 <div class="bge">
                     <div class="bgei">
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-One-Piece.jpg?resize=300,150&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-One-Piece.jpg?resize=300,150&amp;quality=60" class="lazy sd rd" alt="Baca Manga One Piece">
+                        <img src="{{url('/storage/komik/background_detail/'.$terpopuler->slug_manga.'.jpg')}}" style="width:300px; height:150px;" class="sd rd" alt="Baca {{$terpopuler->jenis_manga}} {{$terpopuler->nama_manga}}">
                         <div class="tpe1_inf">
-                            <b>Aksi</b> </div>
+                            <b>{{$terpopuler->konsep_cerita}}</b> </div>
                     </div>
                     <div class="kan">
-                        <h3>
-								One Piece							</h3>
-                        <span>27.3 jt x • 1 hari lalu</span>
+                        <h3> {{$terpopuler->nama_manga}} </h3>
+                        <span>{{$terpopuler->views}} x • 
+                            {{ \Carbon\Carbon::parse($terpopuler->updated_at)->diffForHumans() }}
+                        </span>
                         <p>
-                            Raja Bajak Laut mengkonfirmasi keberadaan harta terbesar yang disebut One~ </p>
-                        <div class="mree"><a href="https://komiku.co.id/manga/one-piece/" class="mla rd sd" title="Baca Manga One Piece">Mulai Baca</a> <span><a href="/other/berwarna" title="Baca Manga Berwarna">Lainnya » </a></span></div>
+                            {{ explode('</li>', explode('<ul class="rs"> <li>', $terpopuler->sinopsis)[1])[0] }}
+                        </p>
+                        <div class="mree">
+                            <a href="{{url('/manga/'.$terpopuler->slug_manga)}}" class="mla rd sd" title="Baca {{$terpopuler->jenis_manga}} {{$terpopuler->nama_manga}}">
+                                Mulai Baca
+                            </a> 
+                            <span>
+                                <a href="{{url('other/berwarna')}}" title="Baca {{$terpopuler->jenis_manga}} Berwarna">Lainnya » </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- MANGA UPDATE HARI INI -->
         <section>
             <div class="h2">
-                <h2>
-					Baca Manga Update Hari Ini!
-				</h2>
+                <h2> Baca Manga Update Hari Ini! </h2>
             </div>
             <div class="tpe1">
-                <div class="tpe1_1">
-                    <a href="https://komiku.co.id/manga/kingdom/">
-                        <div class="gmb2">
-                            <div class="vw Hot"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Kingdom.jpg?resize=216,132&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Kingdom.jpg?resize=216,132&amp;quality=60" class="rd sd lazy" alt="Manga Online Kingdom">
-                            <div class="tpe1_inf">
-                                <b>Aksi</b> </div>
-                        </div>
 
-                        <div class="htipe1">
-                            <h3>
-									Kingdom								</h3>
-                            <div>
-                                2.8 jt x • 1 jam lalu </div>
-                        </div>
+                <!-- LOOPING MANGA HARI INI -->
+                @foreach($mangaToday as $mangaTodayList)
+                    <div class="tpe1_1">
+                        <a href="{{url('/manga/'.$mangaTodayList->slug_manga)}}">
+                            <div class="gmb2">
+                                <div class="vw Hot"></div>
+                                <img src="{{url('/storage/komik/background_detail/'.$mangaTodayList->slug_manga.'.jpg')}}" class="rd sd" alt="{{$mangaTodayList->jenis_manga}} {{$mangaTodayList->nama_manga}}">
+                                <div class="tpe1_inf">
+                                    <b>{{$mangaTodayList->jenis_manga}}</b> 
+                                </div>
+                            </div>
 
-                    </a>
-                    <a href="https://komiku.co.id/kingdom-chapter-640-bahasa-indonesia/" title="Kingdom Chapter 640 Bahasa Indonesia"><span><b>Chapter 640</b></span></a>
-                </div>
-                <div class="tpe1_1">
-                    <a href="https://komiku.co.id/manga/jichou-shinai-motoyuusha-no-tsuyokute-tanoshii-new-game/">
-                        <div class="gmb2">
-                            <div class="vw Rekomendasi"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Komik-Jichou-shinai-Motoyuusha-no-Tsuyokute-Tanoshii-New-Game.jpg?resize=216,132&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Komik-Jichou-shinai-Motoyuusha-no-Tsuyokute-Tanoshii-New-Game.jpg?resize=216,132&amp;quality=60" class="rd sd lazy" alt="Manga Online Jichou shinai Motoyuusha no Tsuyokute Tanoshii New Game">
-                            <div class="tpe1_inf">
-                                <b>Isekai</b> </div>
-                        </div>
+                            <div class="htipe1">
+                                <h3> {{$mangaTodayList->nama_manga}} </h3>
+                                <div>
+                                    {{$mangaTodayList->views}} x • 
+                                    {{ \Carbon\Carbon::parse($mangaTodayList->updated_at)->diffForHumans() }}
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://komiku.co.id/kingdom-chapter-640-bahasa-indonesia/" title="Kingdom Chapter 640 Bahasa Indonesia"><span><b>Chapter 640</b></span></a>
+                    </div>
+                @endforeach
+                <!-- END LOOPING MANGA HARI INI -->
 
-                        <div class="htipe1">
-                            <h3>
-									Jichou shinai Motoyuusha no Tsuyokute Tanoshii New Game								</h3>
-                            <div>
-                                86 rb x • 1 jam lalu </div>
-                        </div>
-
-                    </a>
-                    <a href="https://komiku.co.id/jichou-shinai-motoyuusha-no-tsuyokute-tanoshii-new-game-chapter-19-bahasa-indonesia/" title="Jichou shinai Motoyuusha no Tsuyokute Tanoshii New Game Chapter 19 Bahasa Indonesia"><span><b>Chapter 19</b></span></a>
-                </div>
-                <div class="tpe1_1">
-                    <a href="https://komiku.co.id/manga/fantasy-bishoujo-juniku-ojisan/">
-                        <div class="gmb2">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Fantasy-Bishoujo-Juniku-Ojisan.jpg?resize=216,132&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Fantasy-Bishoujo-Juniku-Ojisan.jpg?resize=216,132&amp;quality=60" class="rd sd lazy" alt="Manga Online Fantasy Bishoujo Juniku Ojisan">
-                            <div class="tpe1_inf">
-                                <b>Isekai</b> </div>
-                        </div>
-
-                        <div class="htipe1">
-                            <h3>
-									Fantasy Bishoujo Juniku Ojisan								</h3>
-                            <div>
-                                41 rb x • 2 jam lalu </div>
-                        </div>
-
-                    </a>
-                    <a href="https://komiku.co.id/fantasy-bishoujo-juniku-ojisan-to-chapter-19-bahasa-indonesia/" title="Fantasy Bishoujo Juniku Ojisan Chapter 19 Bahasa Indonesia"><span><b>Chapter 19</b></span></a>
-                </div>
             </div>
             <a href="/manga/" class="more">Lihat semua update Manga di halaman <b>Manga Terbaru</b> (klik)</a>
         </section>
+        <!-- END MANGA UPDATE HARI INI -->
+
+
         <section>
             <div class="h2 h2t2">
                 <h2>
@@ -627,142 +613,33 @@
                 </div>
             </div>
         </section>
+
+        <!-- SIDE BAR REKOMENDASI -->
         <aside>
             <h2>Rekomendasi Manga</h2>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/naze-boku-no-sekai-wo-daremo-oboeteinai-no-ka/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Naze-Boku-no-Sekai-wo-Daremo-Oboeteinai-no-ka.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Naze-Boku-no-Sekai-wo-Daremo-Oboeteinai-no-ka.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Naze Boku no Sekai wo Daremo Oboeteinai no ka?">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Fantasi </div>
-                    </div>
-                    <h4>
-								Naze Boku no Sekai wo Daremo Oboeteinai no ka?							</h4>
-                    <span>68 rb x • 4 jam lalu</span>
-                </a>
-                <p>
-                    Perang besar antara lima ras di dunia berakhir ketika Hero Sid memimpin~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/hataraku-maou-sama/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Hataraku-Maou-sama.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Hataraku-Maou-sama.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Hataraku Maou-sama!">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Isekai </div>
-                    </div>
-                    <h4>
-								Hataraku Maou-sama!							</h4>
-                    <span>184 rb x • 2 minggu lalu</span>
-                </a>
-                <p>
-                    Raja Iblis hampir berhasil menaklukkan dunia magis. </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/iris-zero/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Iris-Zero.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Iris-Zero.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Iris Zero">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Romantis </div>
-                    </div>
-                    <h4>
-								Iris Zero							</h4>
-                    <span>16 rb x • 2 bulan lalu</span>
-                </a>
-                <p>
-                    Di dunia di mana setiap anak laki-laki dan perempuan memiliki kekuatan~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/plunderer/">
-                    <div class="gmbr1">
-                        <div class="vw Hot"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Plunderer.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Plunderer.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Plunderer">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Fantasi </div>
-                    </div>
-                    <h4>
-								Plunderer							</h4>
-                    <span>1.6 jt x • 2 minggu lalu</span>
-                </a>
-                <p>
-                    Ini tahun 305 Kalender Alcian, dan dunia saat ini dikendalikan oleh~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/saikyou-no-shuzoku-ga-ningen-datta-ken/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Saikyou-no-Shuzoku-ga-Ningen-Datta-Ken.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Saikyou-no-Shuzoku-ga-Ningen-Datta-Ken.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Saikyou no Shuzoku ga Ningen Datta Ken">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Isekai </div>
-                    </div>
-                    <h4>
-								Saikyou no Shuzoku ga Ningen Datta Ken							</h4>
-                    <span>204 rb x • 4 minggu lalu</span>
-                </a>
-                <p>
-                    Amezaki Youji adalah karyawan kantor yang tidak terpenuhi dipanggil ke~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/slime-taoshite-300-nen-shiranai-uchi-ni-level-max-ni-nattemashita/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Slime-Taoshite-300-nen-Shiranai-Uchi-ni-Level-Max-ni-Nattemashita-.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Slime-Taoshite-300-nen-Shiranai-Uchi-ni-Level-Max-ni-Nattemashita-.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Slime Taoshite 300-nen Shiranai Uchi ni Level Max ni Nattemashita ">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Isekai </div>
-                    </div>
-                    <h4>
-								Slime Taoshite 300-nen Shiranai Uchi ni Level Max ni Nattemashita 							</h4>
-                    <span>81 rb x • 12 jam lalu</span>
-                </a>
-                <p>
-                    Budak korporat Azusa meninggal karena terlalu banyak pekerjaan dan~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/world-trigger/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-World-Trigger.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-World-Trigger.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca World Trigger">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Aksi </div>
-                    </div>
-                    <h4>
-								World Trigger							</h4>
-                    <span>121 rb x • 3 minggu lalu</span>
-                </a>
-                <p>
-                    Mikumo Osamu adalah trainee agen Border yang melawan alien yang disebut~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/bungou-stray-dogs/">
-                    <div class="gmbr1">
-                        <div class="vw Rekomendasi"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Komik-bungou-stray-dogs.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2019/05/Komik-bungou-stray-dogs.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Bungou Stray Dogs">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Aksi </div>
-                    </div>
-                    <h4>
-								Bungou Stray Dogs							</h4>
-                    <span>34 rb x • 1 bulan lalu</span>
-                </a>
-                <p>
-                    Nakajima Atsushi diusir dari panti asuhannya, dan sekarang dia tidak punya~ </p>
-            </div>
-            <div class="grd">
-                <a href="https://komiku.co.id/manga/haikyuu/">
-                    <div class="gmbr1">
-                        <div class="vw Hot"></div>
-                        <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Haikyuu.jpg?resize=300,180&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Manga-Haikyuu.jpg?resize=300,180&amp;quality=60" class="lazy" alt="Baca Haikyuu!!">
-                        <div class="tpe1_inf">
-                            <b>Manga</b> Olahraga </div>
-                    </div>
-                    <h4>
-								Haikyuu!!							</h4>
-                    <span>4.5 jt x • 7 jam lalu</span>
-                </a>
-                <p>
-                    Meski pendek, Hinata tidak pernah menyerah bermain voli. </p>
-            </div>
+
+            <!-- LOOPING REKOMENDASI -->
+            @foreach($rekomendasi as $rekomendasiList)
+                <div class="grd">
+                    <a href="{{url('/manga/'.$rekomendasiList->slug_manga)}}">
+                        <div class="gmbr1">
+                            <div class="vw Rekomendasi"></div>
+                            <img src="{{url('/storage/komik/background_detail/'.$rekomendasiList->slug_manga.'.jpg')}}" alt="Baca {{$rekomendasiList->nama_manga}}">
+                            <div class="tpe1_inf">
+                                <b>{{$rekomendasiList->jenis_manga}}</b> {{$rekomendasiList->konsep_cerita}} </div>
+                        </div>
+                        <h4> {{$rekomendasiList->nama_manga}} </h4>
+                        <span>
+                        {{$rekomendasiList->views}} x • 
+                        {{ \Carbon\Carbon::parse($rekomendasiList->updated_at)->diffForHumans() }}</span>
+                    </a>
+                    <p>
+                    {{ explode('</li>', explode('<ul class="rs"> <li>', $rekomendasiList->sinopsis)[1])[0] }} </p>
+                </div>
+            @endforeach
+            <!-- END LOOPING REKOMENDASI -->
+            
         </aside>
+        <!-- END SIDE BAR REKOMENDASI -->
+
 @endsection

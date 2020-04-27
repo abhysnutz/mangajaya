@@ -11,7 +11,7 @@ class GrabController extends Controller
 {   
 
     // GRAB PADA MANGA TERBARU
-    public function newManga(){
+    public function newManga($page = 1){
         $crawler = Goutte::request('GET', 'https://komiku.co.id/manga');
         $manga = $crawler->filter('.bge')->each(function ($node) {
             return $node->html();
@@ -20,7 +20,7 @@ class GrabController extends Controller
         // DEFINISI VARIABEL
         for ($i=19; $i >= 0 ; $i--) { 
             $nama_manga[$i] = trim(explode('</h3>', explode('<h3>', $manga[$i])[1])[0]);
-            $slug_manga[$i] = str_replace(' ', '-', str_replace("'", '', str_replace(':', '', strtolower($nama_manga[$i]))));
+            $slug_manga[$i] = str_replace(' ', '-', str_replace("'", '', str_replace(':', '', str_replace('?', '', strtolower($nama_manga[$i])))));
             $link_manga[$i] = explode('" class="popunder">', explode('<a href="', $manga[$i])[1])[0];
             $episodeChapter[$i] = trim(explode('</a></div>', explode('Chapter', $manga[$i])[1])[0]);
             $linkChapter[$i] = trim(explode('/"', explode('<a href="', $manga[$i])[3])[0]);
@@ -87,14 +87,11 @@ class GrabController extends Controller
                 if(empty($status_manga)){ $status_manga = 'Ongoing'; }
                 if(empty($jenis_manga)){ $jenis_manga = 'Manga'; }
                 
-                $komikus = $jenis_manga == 'Manhwa' ?  '-' : $detail[9]; 
-
-
                 DB::table('detail_manga')->insert([
                     'judul_indo' => $detail[3], 
                     'jenis_manga' => $detail[5], 
                     'konsep_cerita' => $detail[7], 
-                    'komikus'=> $komikus, 
+                    'komikus'=> utf8_encode($detail[9]), 
                     'status_manga' => $status_manga,
                     'rate_umur' =>  $rate_umur,
                     'views' => $detail[15],
@@ -129,35 +126,35 @@ class GrabController extends Controller
                     ]);
                 }
 
+                
+                 // UPDATE OTHER DB
+                 $otherView[$i] = explode(" ", $other[$i]);
+                
+                 if (in_array("Rekomendasi", $otherView[$i])){ 
+                     DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
+                                       ->update(['rekomendasi' => 1]);
+                 }
+                 if (in_array("Hot", $otherView[$i])){  
+                     DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
+                                       ->update(['hot' => 1]); 
+                 }
+                 if (in_array("Berwarna", $otherView[$i])){                                                  
+                     DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
+                                       ->update(['berwarna' => 1]);
+                 }
+
 
                 // INSERT IMAGE SAMPUL
-                $urlSampul = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageSampul[0])[1])[0]));
+                $urlSampul = str_replace("’", '%E2%80%99', html_entity_decode($imageSampul[0]));
                 $pathSampul = 'public/komik/sampul_detail/';
-                Storage::put($pathSampul.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlsampul));
+                Storage::put($pathSampul.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlSampul));
 
 
                 // INSERT IMAGE BACKGROUND
-                // $url = explode(");}}", explode("url(", $imageBackground[0])[1])[0];
                 $urlBackground = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageBackground[0])[1])[0]));
                 $pathBackground = 'public/komik/background_detail/';
                 Storage::put($pathBackground.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlBackground));
 
-
-                // UPDATE OTHER DB
-                $otherView[$i] = explode(" ", $other[$i]);
-                
-                if (in_array("Rekomendasi", $otherView[$i])){ 
-                    DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
-                                      ->update(['rekomendasi' => 1]);
-                }
-                if (in_array("Hot", $otherView[$i])){  
-                    DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
-                                      ->update(['hot' => 1]); 
-                }
-                if (in_array("Berwarna", $otherView[$i])){                                                  
-                    DB::table('other')->where('id_manga', $data_manga[$i][0]->id_manga)
-                                      ->update(['berwarna' => 1]);
-                }
             }
 
             // JIKA MANGA SUDAH ADA MAKA CEK DATA CHAPTER
@@ -221,11 +218,8 @@ class GrabController extends Controller
                 $k++;
             }
         }
-        // echo "<pre>";
-        // var_dump($imageChapter);
-        // echo "</pre>";    
-        
     }
+
 
     // MElAKUKAN GRAB PADA DAFTAR MANGA 
     public function daftarManga(){

@@ -26,10 +26,12 @@
                 <div class="bge">
                     <div class="bgei">
                         <a href="{{url('manga/'.$mangaList->slug_manga)}}" class="popunder">
-                            <div class="vw @if($mangaList->berwarna == 1) Berwarna @endif @if($mangaList->hot == 1) Hot @endif @if($mangaList->rekomendasi == 1) Rekomendasi @endif"> 
-                                @if($mangaList->hot == 1) Hot @endif 
-                                 @if($mangaList->rekomendasi == 1) Rekomendasi @endif
-                            </div>
+                            @if($mangaList->hot == 1 || $mangaList->rekomendasi == 1)
+                                <div class="vw @if($mangaList->berwarna == 1) Berwarna @endif @if($mangaList->hot == 1) Hot @endif @if($mangaList->rekomendasi == 1) Rekomendasi @endif"> 
+                                    @if($mangaList->hot == 1) Hot @endif 
+                                    @if($mangaList->rekomendasi == 1) Rekomendasi @endif
+                                </div>
+                            @endif
                             <img src="{{url('/storage/komik/background_detail/'.$mangaList->slug_manga.'.jpg')}}" class="sd rd">
                             <div class="tpe1_inf">
                                 <b>{{$mangaList->jenis_manga}}</b> {{$mangaList->konsep_cerita}} 
