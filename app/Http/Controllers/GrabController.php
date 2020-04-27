@@ -12,7 +12,7 @@ class GrabController extends Controller
 
     // GRAB PADA MANGA TERBARU
     public function newManga($page = 1){
-        $crawler = Goutte::request('GET', 'https://komiku.co.id/manga');
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/manga/page/'.$page);
         $manga = $crawler->filter('.bge')->each(function ($node) {
             return $node->html();
         });
