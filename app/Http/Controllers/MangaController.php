@@ -10,7 +10,7 @@ class MangaController extends Controller
 {
     public function __construct()
     {
-        $web_title = 'komik abhy';
+        $web_title = 'Manga Jaya';
 
         View::share('web_title', $web_title);
     }
@@ -22,14 +22,27 @@ class MangaController extends Controller
                                      ->orderBy('chapter.updated_at', 'DESC')
                                      ->get();
 
-        // echo "<pre>";
-        // var_dump($manga);
-        // echo "</pre>";
         return view('newManga')->with([
                                         'manga' => $manga
                                        ]);
     }
 
+    public function newMangaFilterKategori($nama_kategori){
+        $manga = DB::table('chapter')->join('manga', 'chapter.id_manga', '=', 'manga.id_manga')
+                                     ->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                     ->join('other', 'manga.id_manga', '=', 'other.id_manga')
+                                     ->where('jenis_manga', $nama_kategori)
+                                     ->orderBy('chapter.updated_at', 'DESC')
+                                     ->get();
+
+        return view('newManga')->with([
+                                        'manga' => $manga
+                                       ]);
+    }
+
+
+
+    // DAFTAR KOMIK LANDING PAGE
     public function daftarManga(){
         $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W' );
         foreach ($char as $abjad) {

@@ -64,18 +64,26 @@ Route::get('/grab/othermangarekomendasi/{page}', 'GrabController@otherMangaRekom
 Route::get('/grab/othermangahot/{page}', 'GrabController@otherMangaHot');
 
 
+// KOMIK TERBARU
 // MANGA LANDING PAGE / NEW MANGA
 Route::get('/manga', 'MangaController@index');
+// DAFTAR MANGA BERDASARKAN KATEGORI (MANGA LANDING PAGE)
+Route::get('/manga/kategori/{nama_kategori}', 'MangaController@newMangaFilterKategori');
 
 
-// DAFTAR KOMIK BERDASARKAN KATEGORI
+
+// DAFTAR KOMIK LANDING PAGE
+// DAFTAR KOMIK BERDASARKAN KATEGORI (DAFTAR KOMIK LANDING PAGE)
 Route::get('/daftar-komik/kategori/{nama_kategori}', 'MangaController@daftarMangaFilterKategori');
 // DAFTAR KOMIK
 Route::get('/daftar-komik', 'MangaController@daftarManga');
+
+
 // DETAIL KOMIK
 Route::get('/manga/{slug_manga}', 'MangaController@detailManga')->name('detailManga');
 // DETAIL CHAPTER
 Route::get('/manga/{slug_manga}/{episode_chapter}', 'MangaController@detailChapter')->name('detailChapter');
+
 
 
 // GENRE
@@ -95,11 +103,11 @@ Route::get('/other/berwarna', 'OtherController@detaiOtherBerwarna');
 
 
 // CATEGORY
-//DAFTAR OTHER HOT
+// MANGA CATEGORY
 Route::get('/category/manga', 'CategoryController@detailCategoryManga')->name('categoryManga');
-//DAFTAR OTHER REKOMENDASI
+// MANHUA CATEGORY
 Route::get('/category/manhua', 'CategoryController@detailCategoryManhua')->name('categoryManhua');;
-//DAFTAR OTHER BERWARNA
+// MANHWA CATEGORY
 Route::get('/category/manhwa', 'CategoryController@detailCategoryManhwa')->name('categoryManhwa');;
 
 

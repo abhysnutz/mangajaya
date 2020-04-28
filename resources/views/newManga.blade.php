@@ -4,21 +4,23 @@
         <h1>
             Baca Komik Terbaru
         </h1>
-        <div class="filter">
-
-            <p>
-                Tampilkan berdasarkan jenis komik:
-            </p>
-            <form class="filer2" action="/manga/">
-                <select name="category_name" id="filter" class="formfiler">
-                    <option class="level-1" value="0">Semua (Manga, Manhua, Manhwa)</option>
-                    <option class="level-1" value="manga">Manga (Jepang)</option>
-                    <option class="level-1" value="manhua">Manhua (China)</option>
-                    <option class="level-1" value="manhwa">Manhwa (Korea)</option>
+        <!-- FILTER JENIS MANGA -->
+        <div class="filter" style="margin:0;margin-bottom: 30px">
+            <p> Filter berdasarkan manga, manhwa, atau manhua? Bisa kalian pilih di bawah ini: </p>
+            <form class="filer2" action="#">
+                <select id="filter" class="formfiler" onchange="linkFilter(this.value)">
+                    <option <?php echo (Request::segment(3) == null ? 'selected' : ''); ?> class="level-1" value="{{url('manga')}}">Default (Manga, Manhua, Manhwa)</option>
+                    <option <?php echo (Request::segment(3) == 'manga' ? 'selected' : ''); ?> class="level-1" value="{{url('manga/kategori/manga')}}">Manga</option>
+                    <option <?php echo (Request::segment(3) == 'manhua' ? 'selected' : ''); ?> class="level-1" value="{{url('manga/kategori/manhua')}}">Manhua (China)</option>
+                    <option <?php echo (Request::segment(3) == 'manhwa' ? 'selected' : ''); ?> class="level-1" value="{{url('manga/kategori/manhwa')}}">Manhwa (Korea)</option>
                 </select>
-                <input class="filter3" value="Filter" type="submit">
             </form>
+            <a href="#" id="abc">
+                <input type="submit" class="filter3" value="Filter"> 
+            </a>
         </div>
+        <!-- END FILTER JENIS MANGA -->
+
         <div class="daftar">
             
             <!-- LOOPING NEW MANGA -->

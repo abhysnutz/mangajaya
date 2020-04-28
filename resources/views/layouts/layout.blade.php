@@ -219,7 +219,7 @@
         </script>
         <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
         
-        @if(Route::currentRouteName() == 'categoryManga')
+        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa')
             <a href="{{url('manga/'.$manga[0]->slug_manga)}}" title="Baca {{$manga[0]->jenis_manga}} {{$manga[0]->nama_manga}}">
                 <div class="cv">
                     <div class="at1">
@@ -266,7 +266,7 @@
 
 
         <!-- SCRIPT PAGE -->
-        @if(Route::currentRouteName() == 'categoryManga')
+        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa')
             <script>
                 function openLink(evt, animName) {
                     var i, x, tablinks;

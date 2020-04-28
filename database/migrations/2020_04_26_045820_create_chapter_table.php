@@ -17,7 +17,7 @@ class CreateChapterTable extends Migration
             $table->bigIncrements('id_chapter');
             $table->decimal('episode_chapter', 5,1);
             $table->string('judul_chapter', 100);
-            $table->integer('views')->default(0);
+            $table->integer('views_chapter')->default(0);
             $table->timestamps();
             
             //relasi ke tabel manga

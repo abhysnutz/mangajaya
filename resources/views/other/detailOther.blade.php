@@ -24,9 +24,13 @@
             <!-- LOOPING OTHER HOT -->
             @foreach($manga as $mangaList)
             <div class="bge">
-                <a href="https://komiku.co.id/manga/shen-haos-heavenly-fall-system/" class="popunder">
+                <a href="{{url('manga/'.$mangaList->slug_manga)}}" class="popunder">
                     <div class="bgei">
-                        <div class="vw Berwarna Hot"> Hot </div> 
+                        @if($mangaList->hot == 1 || $mangaList->rekomendasi == 1)
+                            <div class="vw Berwarna @if($mangaList->hot == 1) Hot @endif @if($mangaList->rekomendasi == 1) Rekomendasi @endif"> 
+                                @if($mangaList->hot == 1) Hot @endif @if($mangaList->rekomendasi == 1) Rekomendasi @endif 
+                            </div>
+                        @endif
                         <img src="{{url('/storage/komik/background_detail/'.$mangaList->slug_manga.'.jpg')}}">
                         <div class="tpe1_inf"> 
                             <b>{{$mangaList->jenis_manga}}</b> {{$mangaList->konsep_cerita}} 
@@ -35,7 +39,8 @@
                     <div class="kan">
                         <h3> {{$mangaList->nama_manga}} </h3> 
                         <span>
-                            {{$mangaList->views}} x • 1 menit lalu 
+                            {{$mangaList->views}} x • 
+                            {{ \Carbon\Carbon::parse($mangaList->updated_at)->diffForHumans() }}
                             @if($mangaList->berwarna == 1) 
                                 • Berwarna 
                             @endif

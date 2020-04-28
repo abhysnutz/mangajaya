@@ -19,7 +19,7 @@
                 </select>
             </form>
             <a href="#" id="abc">
-                <input type="submit" class="filter3" value="Filter" style="position: relative; top: -9px;"> 
+                <input type="submit" class="filter3" value="Filter"> 
             </a>
         </div>
         <!-- END FILTER JENIS MANGA -->

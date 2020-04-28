@@ -152,7 +152,9 @@
             <!-- END LOOPING MANGA HARI INI -->
 
         </div>
-        <a href="{{url('manga')}}" class="more">Lihat semua update {{$title}} di halaman <b>{{$title}} Terbaru</b> (klik)</a>
+        <a href="{{url('manga/kategori/'.$title)}}" class="more">
+            Lihat semua update {{$title}} di halaman <b>{{$title}} Terbaru</b> (klik)
+        </a>
     </section>
     <!-- END MANGA UPDATE HARI INI -->
 
@@ -168,7 +170,7 @@
         </div>
 
         <div id="Isekai" class="sec2 sectipe2" style="display: block;">
-            <a href="/genre/isekai/" class="selengkapnya" title="Manga Isekai">More »</a>
+            <a href="{{url('genre/isekai')}}" class="selengkapnya" title="{{$title}} Isekai">More »</a>
             <div class="scrll">
                 
                 <!-- LOOPING GENRE ISEKAI -->
@@ -179,7 +181,8 @@
                                 <div class="vw @if($isekaiGenreList->hot == 1) Hot @endif"></div>
                                 <img src="{{url('/storage/komik/sampul_detail/'.$isekaiGenreList->slug_manga.'.jpg')}}" class="rd sd" alt="{{$isekaiGenreList->jenis_manga}} {{$isekaiGenreList->nama_manga}} Bahasa Indonesia">
                                 <div class="tpe1_inf">
-                                    <b>Isekai</b> </div>
+                                    <b>{{$isekaiGenreList->konsep_cerita}}</b> 
+                                </div>
                             </div>
                             <h3> {{$isekaiGenreList->nama_manga}} </h3>
                         </a>
@@ -194,7 +197,7 @@
             </div>
         </div>
         <div id="Romance" class="sec2 sectipe2" style="display: none;">
-            <a href="/genre/romance/" class="selengkapnya" title="Manga Romantis">More »</a>
+            <a href="{{url('genre/isekai')}}" class="selengkapnya" title="{{$title}} Romantis">More »</a>
             <div class="scrll">
 
                     <!-- LOOPING GENRE ISEKAI -->
@@ -205,7 +208,8 @@
                                 <div class="vw @if($romanceGenreList->hot == 1) Hot @endif"></div>
                                 <img src="{{url('/storage/komik/sampul_detail/'.$romanceGenreList->slug_manga.'.jpg')}}" class="rd sd" alt="{{$romanceGenreList->jenis_manga}} {{$romanceGenreList->nama_manga}} Bahasa Indonesia">
                                 <div class="tpe1_inf">
-                                    <b>romance</b> </div>
+                                    <b>{{$romanceGenreList->konsep_cerita}}</b>
+                                </div>
                             </div>
                             <h3> {{$romanceGenreList->nama_manga}} </h3>
                         </a>
@@ -224,238 +228,84 @@
     <!-- MANGA BY STATUS -->
     <section>
         <div class="h2 h2t2">
-            <h2>
-                Status Manga
-                </h2>
+            <h2> Status {{$title}} </h2>
+
             <div class="gre">
-                <button class="tab2 tabtipe3 def3 curr" onclick="openLink3(event, 'Manga_Tamat')">Manga Tamat</button>
-                <button class="tab2 tabtipe3" onclick="openLink3(event, 'Manga_Baru')">Manga Baru</button>
+                <button class="tab2 tabtipe3 def3 curr" onclick="openLink3(event, 'Manga_Baru')">Manga Baru</button>
+                <button class="tab2 tabtipe3" onclick="openLink3(event, 'Manga_Tamat')">Manga Tamat</button>
             </div>
         </div>
-        <div id="Manga_Tamat" class="sec2 sectipe3" style="display: block;">
+
+
+        <!-- MANGA BARU -->
+        <div id="Manga_Baru" class="sec2 sectipe3" style="display: block;">
+            <div class="scrll">
+
+                <!-- LOOPING ONGOING MANGA -->
+                @foreach($onGoingStatus as $onGoingStatus)
+                    <div class="grd2">
+                        <a href="{{url('/manga/'.$onGoingStatus->slug_manga)}}">
+                            <div class="imr">
+                                <div class="vw @if($onGoingStatus->hot == 1) Hot @endif"></div>
+                                <img src="{{url('/storage/komik/sampul_detail/'.$onGoingStatus->slug_manga.'.jpg')}}" class="rd sd" alt="{{$onGoingStatus->nama_manga}} Indo">
+                                <div class="tpe1_inf">
+                                    <b>{{$onGoingStatus->konsep_cerita}}</b> 
+                                </div>
+                            </div>
+
+                            <h3> {{$onGoingStatus->nama_manga}} </h3>
+                        </a>
+
+                        <span>
+                            {{$onGoingStatus->views}} x • 
+                            {{ \Carbon\Carbon::parse($onGoingStatus->updated_at)->diffForHumans() }}
+                        </span>
+                    </div>
+                @endforeach
+                <!-- END LOOPING ONGOING MANGA -->
+                
+            </div>
+        </div>
+        <!-- END MANGA BARU -->
+
+        <!-- MANGA TAMAT -->
+        <div id="Manga_Tamat" class="sec2 sectipe3" style="display: none;">
             <a href="/status/end/" class="selengkapnya" title="Manga Tamat">More »</a>
             <div class="scrll">
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/glamorous/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Glamorous.jpg?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Glamorous.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Glamorous Indo">
-                            <div class="tpe1_inf">
-                                <b>Romantis</b> </div>
-                        </div>
-                        <h3>
-                            Glamorous							</h3>
-                    </a>
-                    <span>16 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/aimane-akuma-na-kanojo-o-produce/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Aimane---Akuma-na-Kanojo-o-Produce.jpg?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Aimane---Akuma-na-Kanojo-o-Produce.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Aimane - Akuma na Kanojo o Produce Indo">
-                            <div class="tpe1_inf">
-                                <b>Romantis</b> </div>
-                        </div>
-                        <h3>
-                            Aimane - Akuma na Kanojo o Produce							</h3>
-                    </a>
-                    <span>17 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/ookami-shounen-wa-kyou-mo-uso-wo-kasaneru/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ookami-Shounen-wa-Kyou-mo-Uso-wo-Kasaneru.jpg?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Ookami-Shounen-wa-Kyou-mo-Uso-wo-Kasaneru.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Ookami Shounen wa Kyou mo Uso wo Kasaneru Indo">
-                            <div class="tpe1_inf">
-                                <b>Drama</b> </div>
-                        </div>
-                        <h3>
-                            Ookami Shounen wa Kyou mo Uso wo Kasaneru							</h3>
-                    </a>
-                    <span>11 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/gal-kazoku/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Gal-Kazoku.jpeg?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Gal-Kazoku.jpeg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Gal Kazoku Indo">
-                            <div class="tpe1_inf">
-                                <b>Romantis</b> </div>
-                        </div>
-                        <h3>
-                            Gal Kazoku							</h3>
-                    </a>
-                    <span>10 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/tora-kiss/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Tora-Kiss.jpg?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Tora-Kiss.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Tora Kiss Indo">
-                            <div class="tpe1_inf">
-                                <b>Aksi</b> </div>
-                        </div>
-                        <h3>
-                            Tora Kiss							</h3>
-                    </a>
-                    <span>24 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/dr-stone-spinoff/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Dr-Stone-SpinOff.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Dr Stone SpinOff Indo">
-                            <div class="tpe1_inf">
-                                <b>Fiksi Sains</b> </div>
-                        </div>
-                        <h3>
-                            Dr Stone SpinOff							</h3>
-                    </a>
-                    <span>32 rb x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/shokugeki-no-souma-bahasa-indonesia/">
-                        <div class="imr">
-                            <div class="vw Hot"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Shokugeki-no-Souma.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Shokugeki no Souma Indo">
-                            <div class="tpe1_inf">
-                                <b>Drama</b> </div>
-                        </div>
-                        <h3>
-                            Shokugeki no Souma							</h3>
-                    </a>
-                    <span>2.6 jt x • 2 bulan lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/golem-hearts/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/Komik-Golem-Hearts.jpeg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Golem Hearts Indo">
-                            <div class="tpe1_inf">
-                                <b>Fantasi</b> </div>
-                        </div>
-                        <h3>
-                            Golem Hearts							</h3>
-                    </a>
-                    <span>3 rb x • 2 bulan lalu</span>
-                </div>
+
+                <!-- LOOPING END MANGA -->
+                @foreach($endStatus as $endStatusList)
+                    <div class="grd2">
+                        <a href="{{url('/manga/'.$endStatusList->slug_manga)}}">
+                            <div class="imr">
+                                <div class="vw @if($endStatusList->hot == 1) Hot @endif"></div>
+                                <img src="{{url('/storage/komik/sampul_detail/'.$endStatusList->slug_manga.'.jpg')}}" class="rd sd" alt="{{$endStatusList->nama_manga}} Indo">
+                                <div class="tpe1_inf">
+                                    <b>{{$endStatusList->konsep_cerita}}</b> 
+                                </div>
+                            </div>
+
+                            <h3> {{$endStatusList->nama_manga}} </h3>
+                        </a>
+
+                        <span>
+                            {{$endStatusList->views}} x • 
+                            {{ \Carbon\Carbon::parse($endStatusList->updated_at)->diffForHumans() }}
+                        </span>
+                    </div>
+                @endforeach
+                <!-- END LOOPING END MANGA -->
 
             </div>
-        </div>
-        <div id="Manga_Baru" class="sec2 sectipe3" style="display: none;">
-            <div class="scrll">
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/isekai-monster-breeder/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manga-Isekai-Monster-Breeder.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Isekai Monster Breeder Indo">
-                            <div class="tpe1_inf">
-                                <b>Isekai</b> </div>
-                        </div>
-                        <h3>
-                            Isekai Monster Breeder							</h3>
-                    </a>
-                    <span>13 rb x • 1 hari lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/shin-no-nakama-janai-to-yuusha-no-party-wo-oidasareta-node-henkyou-de-slow-life-suru-koto-ni-shimashita/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manga-Shin-no-Nakama-janai-to-Yuusha-no-Party-wo-Oidasareta-node-Henkyou-de-Slow-Life-suru-Koto-ni-shimashita.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Shin no Nakama janai to Yuusha no Party wo Oidasareta node Henkyou de Slow Life suru Koto ni shimashita Indo">
-                            <div class="tpe1_inf">
-                                <b>Fantasi</b> </div>
-                        </div>
-                        <h3>
-                            Shin no Nakama janai to Yuusha no Party wo Oidasareta node Henkyou de Slow Life suru Koto ni shimashita							</h3>
-                    </a>
-                    <span>32 rb x • 1 minggu lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/jichou-shinai-motoyuusha-no-tsuyokute-tanoshii-new-game/">
-                        <div class="imr">
-                            <div class="vw Rekomendasi"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manga-Jichou-shinai-Motoyuusha-no-Tsuyokute-Tanoshii-New-Game.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Jichou shinai Motoyuusha no Tsuyokute Tanoshii New Game Indo">
-                            <div class="tpe1_inf">
-                                <b>Isekai</b> </div>
-                        </div>
-                        <h3>
-                            Jichou shinai Motoyuusha no Tsuyokute Tanoshii New Game							</h3>
-                    </a>
-                    <span>86 rb x • 1 jam lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/yasei-no-last-boss-ga-arawareta/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/04/Manga-Yasei-no-Last-Boss-ga-Arawareta.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Yasei no Last Boss ga Arawareta Indo">
-                            <div class="tpe1_inf">
-                                <b>Isekai</b> </div>
-                        </div>
-                        <h3>
-                            Yasei no Last Boss ga Arawareta							</h3>
-                    </a>
-                    <span>49 rb x • 3 minggu lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/gokushufudou-the-way-of-the-house-husband/">
-                        <div class="imr">
-                            <div class="vw Rekomendasi"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manga-Gokushufudou-The-Way-of-the-House-Husband.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Gokushufudou: The Way of the House Husband Indo">
-                            <div class="tpe1_inf">
-                                <b>Komedi</b> </div>
-                        </div>
-                        <h3>
-                            Gokushufudou: The Way of the House Husband							</h3>
-                    </a>
-                    <span>75 rb x • 1 minggu lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/shishidou-san-ni-shikararetai/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manga-Shishidou-san-ni-Shikararetai.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Shishidou-san ni Shikararetai Indo">
-                            <div class="tpe1_inf">
-                                <b>Romantis</b> </div>
-                        </div>
-                        <h3>
-                            Shishidou-san ni Shikararetai							</h3>
-                    </a>
-                    <span>35 rb x • 4 minggu lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/pashiri-na-boku-to-koisuru-banchou-san/">
-                        <div class="imr">
-                            <div class="vw Rekomendasi"></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manga-Pashiri-na-Boku-to-Koisuru-Banchou-san.jpg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Pashiri na Boku to Koisuru Banchou-san Indo">
-                            <div class="tpe1_inf">
-                                <b>Romantis</b> </div>
-                        </div>
-                        <h3>
-                            Pashiri na Boku to Koisuru Banchou-san							</h3>
-                    </a>
-                    <span>63 rb x • 3 minggu lalu</span>
-                </div>
-                <div class="grd2">
-                    <a href="https://komiku.co.id/manga/kaiko-sareta-ankoku-heishi-30-dai-no-slow-na-second-life/">
-                        <div class="imr">
-                            <div class="vw "></div>
-                            <img src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/02/load.gif?resize=155,200&amp;quality=60" data-src="https://i0.wp.com/komiku.co.id/wp-content/uploads/2020/03/Manga-Kaiko-sareta-Ankoku-Heishi-30-dai-no-Slow-na-Second-Life.jpeg?resize=155,200&amp;quality=60" class="lazy rd sd" alt="Kaiko sareta Ankoku Heishi (30-dai) no Slow na Second Life Indo">
-                            <div class="tpe1_inf">
-                                <b>Fantasi</b> </div>
-                        </div>
-                        <h3>
-                            Kaiko sareta Ankoku Heishi (30-dai) no Slow na Second Life							</h3>
-                    </a>
-                    <span>30 rb x • 2 minggu lalu</span>
-                </div>
-
-            </div>
+            <!-- END MANGA TAMAT -->
         </div>
     </section>
+    <!-- END MANGA BY STATUS -->
+
 
     <!-- SIDE BAR REKOMENDASI -->
     <aside>
-        <h2>Rekomendasi Manga</h2>
+        <h2>Rekomendasi {{$title}}</h2>
 
         <!-- LOOPING REKOMENDASI -->
         @foreach($rekomendasi as $rekomendasiList)
