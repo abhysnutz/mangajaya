@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('konten')
     <section style="margin-bottom:0px;border-top:0;width:calc(100% - 30px)">
-        <h1> Komik Tambahan Hot </h1>
-        <p class="top1"> Baca komik dengan Tambahan Hot terlengkap bahasa Indonesia. Di Komiku kalian bisa membaca Manga Tambahan Hot terbaru. </p>
+        <h1> Komik Tambahan {{$title}} </h1>
+        <p class="top1"> Baca komik dengan Tambahan {{$title}} terlengkap bahasa Indonesia. Di Komiku kalian bisa membaca Manga Tambahan {{$title}} terbaru. </p>
         <!-- <div class="filter">
             <p> Tampilkan berdasarkan jenis komik: </p>
             <form class="filer2" action="">
@@ -45,7 +45,9 @@
                                 • Berwarna 
                             @endif
                         </span>
-                        <p> Tiga tahun dalam karirnya, Xiao Ge mengalami banyak penghinaan. </p>
+                        <p> 
+                            {{ explode('</li>', explode('<ul class="rs"> <li>', $mangaList->sinopsis)[1])[0] }} 
+                        </p>
                     </div>
                 </a>
             </div>

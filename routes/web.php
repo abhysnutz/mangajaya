@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('tes', function(){
-    
-});
+// HOME
+Route::get('/', 'HomeController@index')->name('home');
+
+
 // TRUNCATE
 Route::get('trun', function(){
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -29,15 +30,11 @@ Route::get('trun', function(){
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 });
 
-Route::get('/', function() {
-    return view('welcome');
-});
+
 
 // GRAB
 // melakukan grab pada manga terbaru (DB MANGA)
 Route::get('/grab/newmanga/{page?}', 'GrabController@newManga');
-// melakukan grab pada manga terbaru perPage (DB MANGA)
-// Route::get('/grab/newmanga/page/{page}', 'GrabController@newMangaPerPage');
 // melakukan grab pada daftar manga (DB MANGA)
 Route::get('/grab/daftarmanga', 'GrabController@daftarManga');
 // melakukan grab pada detail manga (DB DETAIL MANGA)

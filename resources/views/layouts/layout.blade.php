@@ -25,9 +25,9 @@
                 }
             </style>
         @endif
-        <link rel="icon" href="https://komiku.co.id/wp-content/uploads/2020/02/Baca-Komik.png">
+        <!-- <link rel="icon" href="https://komiku.co.id/wp-content/uploads/2020/02/Baca-Komik.png">
         <link rel="dns-prefetch" href="https://i0.wp.com/">
-        <link rel="dns-prefetch" href="https://iklan.komiku.co.id/">
+        <link rel="dns-prefetch" href="https://iklan.komiku.co.id/"> -->
         <meta name="theme-color" content="#fff">
         <style rel="stylesheet" type="text/css" media="screen">
             a.mobileads {
@@ -181,13 +181,13 @@
             <nav itemscope="" itemtype="http://www.schema.org/SiteNavigationElement">
                 <ul>
                     <li itemprop="name"><a itemprop="url" href="{{url('/manga')}}" title="Update Komik Terbaru">Terbaru</a></li>
-                    <li itemprop="name"><a itemprop="url" href="/ikuti/" rel="nofollow">Subscribe <i>(new)</i></a></li>
+                    <li itemprop="name"><a itemprop="url" href="#" rel="nofollow">Subscribe <i>(new)</i></a></li>
                     <li itemprop="name"><a itemprop="url" href="{{url('/daftar-komik')}}" title="Daftar Komik">Daftar Komik</a></li>
                     <li itemprop="name"><a itemprop="url" href="{{url('/daftar-genre')}}" title="Daftar Genre">Genre</a></li>
-                    <li itemprop="name"><a itemprop="url" href="/manga/one-piece-bahasa-indonesia/" title="Komik One Piece">One Piece</a></li>
-                    <li itemprop="name"><a itemprop="url" href="/manga/kimetsu-no-yaiba-indo/" title="Komik Kimetsu no Yaiba">Kimetsu no Yaiba</a></li>
-                    <li itemprop="name"><a itemprop="url" href="/manga/solo-leveling-bahasa-indonesia/" title="Komik Solo Leveling">Solo Leveling</a></li>
-                    <li itemprop="name"><a itemprop="url" href="/manga/boruto/" title="Komik Boruto">Boruto</a></li>
+                    <li itemprop="name"><a itemprop="url" href="#" title="Komik One Piece">One Piece</a></li>
+                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Kimetsu no Yaiba">Kimetsu no Yaiba</a></li>
+                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Solo Leveling">Solo Leveling</a></li>
+                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Boruto">Boruto</a></li>
                 </ul>
             </nav>
         </header>
@@ -219,7 +219,7 @@
         </script>
         <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
         
-        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa')
+        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa'|| Route::currentRouteName() == 'home')
             <a href="{{url('manga/'.$manga[0]->slug_manga)}}" title="Baca {{$manga[0]->jenis_manga}} {{$manga[0]->nama_manga}}">
                 <div class="cv">
                     <div class="at1">
@@ -266,7 +266,7 @@
 
 
         <!-- SCRIPT PAGE -->
-        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa')
+        @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa'|| Route::currentRouteName() == 'home')
             <script>
                 function openLink(evt, animName) {
                     var i, x, tablinks;
