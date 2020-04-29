@@ -215,7 +215,7 @@
                         </div>
                         <h4> {{$similarMangaList->nama_manga}} </h4> </a>
                     <p>                            
-                        {{ explode('</li>', explode('<ul class="rs"> <li>', $similarMangaList->sinopsis)[1])[0] }}
+                    {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $similarMangaList->sinopsis))[1])[0] }}
                     </p>
                 </div>
             @endforeach

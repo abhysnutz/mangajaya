@@ -154,7 +154,6 @@ class GrabController extends Controller
                 $urlBackground = str_replace("’", '%E2%80%99', html_entity_decode(explode(");}}", explode("url(", $imageBackground[0])[1])[0]));
                 $pathBackground = 'public/komik/background_detail/';
                 Storage::put($pathBackground.$data_manga[$i][0]->slug_manga.'.jpg', file_get_contents($urlBackground));
-
             }
 
             // JIKA MANGA SUDAH ADA MAKA CEK DATA CHAPTER

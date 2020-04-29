@@ -323,7 +323,7 @@
                     {{ \Carbon\Carbon::parse($rekomendasiList->updated_at)->diffForHumans() }}</span>
                 </a>
                 <p>
-                {{ explode('</li>', explode('<ul class="rs"> <li>', $rekomendasiList->sinopsis)[1])[0] }} </p>
+                {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $rekomendasiList->sinopsis))[1])[0] }} </p>
             </div>
         @endforeach
         <!-- END LOOPING REKOMENDASI -->
