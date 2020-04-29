@@ -8,9 +8,12 @@ use DB;
 class CategoryController extends Controller
 {
     public function detailCategoryManga(){
+
         $title = "Manga";
         $description = "Manga (漫画 manga) adalah komik atau novel grafis yang dibuat di Jepang atau oleh orang yang menggunakan bahasa Jepang dan sesuai dengan gaya yang dikembangkan di Jepang pada akhir abad ke-19. Mereka memiliki pra-sejarah yang panjang dan kompleks dalam seni Jepang sebelumnya.";
         $negara = "Jepang";
+        $page_title = "Baca Manga (Komik Jepang)";
+        $web_description = "Baca Manga (Komik Jepang) bahasa Indonesia di Mangajaya. Manga (漫画 manga) adalah komik atau novel grafis yang dibuat di Jepang atau oleh orang yang menggunakan bahasa Jepang.";
 
         $manga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                     ->where('jenis_manga', 'Manga')
@@ -73,6 +76,8 @@ class CategoryController extends Controller
                                          ->get();
         
         return view('category.detailCategory')->with([    
+                                                        'page_title' => $page_title,
+                                                        'web_description' => $web_description,
                                                         'title' => $title,
                                                         'description' => $description,
                                                         'manga' => $manga,
@@ -93,6 +98,8 @@ class CategoryController extends Controller
         $title = "Manhua";
         $description = "Manhua (漫画) adalah sebutan untuk komik cina atau berbahasa Mandarin yang dibuat di Tiongkok Daratan, Hong Kong, dan Taiwan.";
         $negara = "China";
+        $page_title = "Baca Manhua (Komik China)";
+        $web_description = "Baca Manhua (Komik China) bahasa Indonesia di Mangajaya. Manhua adalah sebutan untuk komik cina atau berbahasa Mandarin yang dibuat di Tiongkok Daratan, Hong Kong, dan Taiwan.";
 
         $manga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                     ->where('jenis_manga', 'Manhua')
@@ -155,6 +162,8 @@ class CategoryController extends Controller
                                          ->get();
         
         return view('category.detailCategory')->with([    
+                                                        'page_title' => $page_title,
+                                                        'web_description' => $web_description,
                                                         'title' => $title,
                                                         'description' => $description,
                                                         'manga' => $manga,
@@ -167,13 +176,14 @@ class CategoryController extends Controller
                                                         'endStatus' => $endStatus,
                                                         'onGoingStatus' => $onGoingStatus,
                                                     ]);
-
     }
 
     public function detailCategoryManhwa(){
         $title = "Manhwa";
         $description = "Manhwa (만화) ialah istilah dalah bahasa Korea untuk menyebut komik. Di luar wilayah Korea, istilah manhwa mengacu pada komik buatan Korea.";
         $negara = "Korea";
+        $page_title = "Baca Manhwa (Komik Korea)";
+        $web_description = "Baca Manhwa (Komik Korea) bahasa Indonesia di Mangajaya. Manhwa adalah istilah dalah bahasa Korea untuk menyebut komik. Di luar wilayah Korea, istilah manhwa mengacu pada komik buatan Korea.";
 
         $manga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                     ->where('jenis_manga', 'Manhwa')
@@ -236,6 +246,8 @@ class CategoryController extends Controller
                                          ->get();
         
         return view('category.detailCategory')->with([    
+                                                        'page_title' => $page_title,
+                                                        'web_description' => $web_description,
                                                         'title' => $title,
                                                         'description' => $description,
                                                         'manga' => $manga,

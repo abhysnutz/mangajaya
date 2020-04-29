@@ -8,15 +8,11 @@ use View;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $web_title = 'Manga Jaya';
-
-        View::share('web_title', $web_title);
-    }
     
-    public function index()
-    {
+    public function index(){
+        $page_title = "Baca Komik Gratis Bahasa Indonesia";
+        $web_description = "Mangajaya adalah website preview baca komik online gratis berbahasa Indonesia. Kalian bisa membaca preview Komik Jepang, Komik Korea, dan Komik China secara gratis di Mangajaya!";
+
         $manga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                     ->orderBy('views', 'DESC')
                                     ->get();
@@ -28,12 +24,23 @@ class HomeController extends Controller
                                       ->limit(8)
                                       ->get();
 
-        $newManga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
-                                      ->join('other', 'other.id_manga', '=', 'manga.id_manga')
-                                      ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+        // NEW MANGA
+        $id_mangaNewManga = DB::table('manga')->select('manga.id_manga')
                                       ->orderBy('manga.updated_at', 'DESC')
                                       ->limit(12)
                                       ->get();
+
+        foreach ($id_mangaNewManga as $value) {
+            $newManga[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                            ->join('other', 'other.id_manga', '=', 'manga.id_manga')
+                                            ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'berwarna', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
+                                            ->where('manga.id_manga', $value->id_manga)
+                                            ->orderBy('chapter.updated_at', 'DESC')
+                                            ->limit(1)
+                                            ->get();
+        }
+        // END NEW MANGA
 
         $fantasiManga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                           ->join('other', 'other.id_manga', '=', 'manga.id_manga')
@@ -74,8 +81,11 @@ class HomeController extends Controller
                                          ->orderBy('detail_manga.views', 'DESC')
                                          ->limit(12)
                                          ->get();
+
         return view('home')->with([    
-                                        'hotManga' =>$hotManga,
+                                        'page_title' => $page_title,
+                                        'web_description' => $web_description,
+                                        'hotManga' => $hotManga,
                                         'manga' => $manga,
                                         'newManga' => $newManga,
                                         'fantasiManga' => $fantasiManga,

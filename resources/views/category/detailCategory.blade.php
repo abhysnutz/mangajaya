@@ -100,7 +100,7 @@
                         {{ \Carbon\Carbon::parse($terpopuler->updated_at)->diffForHumans() }}
                     </span>
                     <p>
-                        {{ explode('</li>', explode('<ul class="rs"> <li>', $terpopuler->sinopsis)[1])[0] }}
+                        {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $terpopuler->sinopsis))[1])[0] }}
                     </p>
                     <div class="mree">
                         <a href="{{url('/manga/'.$terpopuler->slug_manga)}}" class="mla rd sd" title="Baca {{$terpopuler->jenis_manga}} {{$terpopuler->nama_manga}}">

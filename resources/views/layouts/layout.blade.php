@@ -5,8 +5,8 @@
         <meta name="referrer" content="no-referrer-when-downgrade">
         <meta name="viewport" content="width=device-width">
         <meta name="robots" content="all">
-        <title>Daftar Komik - Komiku</title>
-        <meta name="description" content="Daftar Komik terlengkap yang tersedia di Komiku, semua berbahasa Indonesia dengan kualitas gambar HD.">
+        <title>{{$page_title}} - {{$web_title}}</title>
+        <meta name="description" content="{{$web_description}}">
         <!-- <meta name="google-site-verification" content="-7mnNLp_bkQmElA8T0yP4o1Akoixf7OpiK52_B4sCpk"> -->
         <!-- <meta name="propeller" content="e5a0c8cbdd07c2c0e0056db72d0cddf5"> -->
 
@@ -25,9 +25,8 @@
                 }
             </style>
         @endif
-        <!-- <link rel="icon" href="https://komiku.co.id/wp-content/uploads/2020/02/Baca-Komik.png">
-        <link rel="dns-prefetch" href="https://i0.wp.com/">
-        <link rel="dns-prefetch" href="https://iklan.komiku.co.id/"> -->
+        <!-- <link rel="icon" href="https://komiku.co.id/wp-content/uploads/2020/02/Baca-Komik.png"> -->
+
         <meta name="theme-color" content="#fff">
         <style rel="stylesheet" type="text/css" media="screen">
             a.mobileads {
@@ -148,32 +147,42 @@
                         <a href="/">
                             <svg class="svg-inline--fa fa-korvue fa-w-14" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="korvue" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 446 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M386.5 34h-327C26.8 34 0 60.8 0 93.5v327.1C0 453.2 26.8 480 59.5 480h327.1c33 0 59.5-26.8 59.5-59.5v-327C446 60.8 419.2 34 386.5 34zM87.1 120.8h96v116l61.8-116h110.9l-81.2 132H87.1v-132zm161.8 272.1l-65.7-113.6v113.6h-96V262.1h191.5l88.6 130.8H248.9z"></path>
-                                </svg><span>Komiku</span></a>
+                            </svg>
+                            <span>Komiku</span>
+                        </a>
                     </div>
                     <form class="search_box active" id="search_box" action="/">
                         <select name="post_type" id="searchform_cat" class="postform" style="display:none">
                             <option class="level-1" value="manga">Manga</option>
                         </select>
                         <input name="s" id="s" placeholder="Komiku.co" type="text">
-                        <input class="search_icon" value="Cari" type="submit"> </form>
+                        <input class="search_icon" value="Cari" type="submit">
+                    </form>
+
                     <ul class="second_nav">
                         <li>
                             <a href="{{url('/other/hot')}}" title="Komik Hot">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="fire-alt" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" style="color: #df0000;">
                                     <path fill="currentColor" d="M323.56 51.2c-20.8 19.3-39.58 39.59-56.22 59.97C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 209.96 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-51.98-163.14-124.44-230.4zm-19.47 340.65C282.43 407.01 255.72 416 226.86 416 154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 7.98 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 19.97 27.35 52.19 15.81 118.97-33.43 153.42z"></path>
-                                </svg> <span>Hot</span></a>
+                                </svg>
+                                <span>Hot</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{url('/other/rekomendasi')}}" title="Komik Rekomendasi">
                                 <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="thumbs-up" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="" style="color: #4163b2;">
                                     <path fill="currentColor" d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path>
-                                </svg> <span>Rekomendasi</span></a>
+                                </svg>
+                                <span>Rekomendasi</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{url('/other/berwarna')}}" title="Komik Berwarna/Full Color">
                                 <svg style="color: #df6300;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="palette" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M204.3 5C104.9 24.4 24.8 104.3 5.2 203.4c-37 187 131.7 326.4 258.8 306.7 41.2-6.4 61.4-54.6 42.5-91.7-23.1-45.4 9.9-98.4 60.9-98.4h79.7c35.8 0 64.8-29.6 64.9-65.3C511.5 97.1 368.1-26.9 204.3 5zM96 320c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm32-128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128-64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"></path>
-                                </svg> <span>Berwarna</span></a>
+                                </svg>
+                                <span>Berwarna</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -191,7 +200,7 @@
                 </ul>
             </nav>
         </header>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function() {
                 var lazyImages = [].slice.call(document.querySelectorAll(".lazy"));
                 if ("IntersectionObserver" in window) {
@@ -210,14 +219,14 @@
                     });
                 }
             });
-        </script>
+        </script> -->
+
         <script>
-        function linkFilter(id)
-            {
+            function linkFilter(id){
                 document.getElementById("abc").href = id;
             }
         </script>
-        <link rel="stylesheet" href="https://komiku.co.id/wp-content/themes/komik/style.css">
+        <link rel="stylesheet" href="{{url('css/style.css')}}">
         
         @if(Route::currentRouteName() == 'categoryManga' || Route::currentRouteName() == 'categoryManhua' || Route::currentRouteName() == 'categoryManhwa'|| Route::currentRouteName() == 'home')
             <a href="{{url('manga/'.$manga[0]->slug_manga)}}" title="Baca {{$manga[0]->jenis_manga}} {{$manga[0]->nama_manga}}">
@@ -363,7 +372,7 @@
                 <p>Catatan: klik tombol tutup dibawah iklan akan muncul 1x perhalaman. Maaf mengganggu dan mohon dimaklumi.</p>
                 <br>
             </div> -->
-            <script type="text/javascript" src="https://iklan.komiku.co.id/jquery2.js"></script>
+            <!-- <script type="text/javascript" src="https://iklan.komiku.co.id/jquery2.js"></script> -->
 
             @if(Route::currentRouteName() != 'detailChapter')
                 <div class="navindex">
@@ -372,35 +381,42 @@
                             <a href="{{url('/')}}" title="Baca Komik">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
-                                </svg><span>Beranda</span></a>
+                                </svg><span>Beranda</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="/trending/" style="color: #df0000;" title="Komik Trending">
+                            <a href="{{url('trending')}}" style="color: #df0000;" title="Komik Trending">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="fire-alt" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M323.56 51.2c-20.8 19.3-39.58 39.59-56.22 59.97C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 209.96 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-51.98-163.14-124.44-230.4zm-19.47 340.65C282.43 407.01 255.72 416 226.86 416 154.71 416 96 368.26 96 290.75c0-38.61 24.31-72.63 72.79-130.75 6.93 7.98 98.83 125.34 98.83 125.34l58.63-66.88c4.14 6.85 7.91 13.55 11.27 19.97 27.35 52.19 15.81 118.97-33.43 153.42z"></path>
-                                </svg><span>Trending</span></a>
+                                </svg><span>Trending</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{url('category/manga/')}}" title="Baca Manga">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
-                                </svg><span>Manga</span></a>
+                                </svg><span>Manga</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{url('category/manhua/')}}" title="Baca Manhua">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
-                                </svg><span>Manhua</span></a>
+                                </svg><span>Manhua</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{url('category/manhwa/')}}" title="Baca Manhwa">
                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-reader" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M352 96c0-53.02-42.98-96-96-96s-96 42.98-96 96 42.98 96 96 96 96-42.98 96-96zM233.59 241.1c-59.33-36.32-155.43-46.3-203.79-49.05C13.55 191.13 0 203.51 0 219.14v222.8c0 14.33 11.59 26.28 26.49 27.05 43.66 2.29 131.99 10.68 193.04 41.43 9.37 4.72 20.48-1.71 20.48-11.87V252.56c-.01-4.67-2.32-8.95-6.42-11.46zm248.61-49.05c-48.35 2.74-144.46 12.73-203.78 49.05-4.1 2.51-6.41 6.96-6.41 11.63v245.79c0 10.19 11.14 16.63 20.54 11.9 61.04-30.72 149.32-39.11 192.97-41.4 14.9-.78 26.49-12.73 26.49-27.06V219.14c-.01-15.63-13.56-28.01-29.81-27.09z"></path>
-                                </svg><span>Manhwa</span></a>
+                                </svg><span>Manhwa</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
             @endif
+
+
             <script type="text/javascript">
                 $(function changeThemeColor() {
                     var e = $(document).scrollTop();
@@ -447,8 +463,8 @@
                     element.classList.toggle("click");
                 }
             </script>
-            <script src="/js/2218646/" async=""></script>
-            <script type="text/javascript">
+            <!-- <script src="/js/2218646/" async=""></script> -->
+            <!-- <script type="text/javascript">
                 (function() {
                     window['__CF$cv$params'] = {
                         r: '58a144f23d6c32b5',
@@ -457,7 +473,7 @@
                         fb: 0,
                     }
                 })();
-            </script>
+            </script> -->
             <div style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:9999999;display:none;"></div>
         @endif
 

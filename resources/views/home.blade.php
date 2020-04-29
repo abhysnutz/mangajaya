@@ -4,7 +4,6 @@
         <h1> {{$web_title}} - Baca Komik </h1>
         <p class="top1"> Baca 16 komik terpopuler di minggu ini versi {{$web_title}}. </p>
 
-
         <div id="Populer-1" class="sec" style="display: block;">
             <!-- LOOPING PAGE 1 -->
             @foreach($manga as $key => $mangaList)
@@ -16,8 +15,9 @@
                                 ★ {{$loop->iteration}} 
                             </div>
                             <h3>
-                            {{$mangaList->nama_manga}}
-                            </h3> {{$mangaList->views}} x •
+                                {{$mangaList->nama_manga}}
+                            </h3> 
+                            {{$mangaList->views}} x •
                             {{ \Carbon\Carbon::parse($mangaList->updated_at)->diffForHumans() }}
                         </a>
                     </div>
@@ -145,26 +145,26 @@
             <!-- LOOPING KOMIK TERBARU -->
             @foreach($newManga as $newMangaList)
                 <div class="tpe1_1">
-                    <a class="popunder" href="{{url('/manga/'.$newMangaList->slug_manga)}}" title="Baca {{$newMangaList->jenis_manga}} {{$newMangaList->nama_manga}}">
+                    <a class="popunder" href="{{url('/manga/'.$newMangaList[0]->slug_manga)}}" title="Baca {{$newMangaList[0]->jenis_manga}} {{$newMangaList[0]->nama_manga}}">
                         <div class="gmb2">
-                            <div class="vw Berwarna"> @if($newMangaList->berwarna == 1) Warna @endif </div> 
-                            <img src="{{url('/storage/komik/background_detail/'.$newMangaList->slug_manga.'.jpg')}}" style="width:220px; height:134px;" class="rd sd" alt="Komik Online {{$newMangaList->nama_manga}}">
+                            <div class="vw Berwarna"> @if($newMangaList[0]->berwarna == 1) Warna @endif </div> 
+                            <img src="{{url('/storage/komik/background_detail/'.$newMangaList[0]->slug_manga.'.jpg')}}" style="width:220px; height:134px;" class="rd sd" alt="Komik Online {{$newMangaList[0]->nama_manga}}">
                             <div class="tpe1_inf"> 
-                                <b>{{$newMangaList->konsep_cerita}}</b>
+                                <b>{{$newMangaList[0]->konsep_cerita}}</b>
                             </div>
-                            <div class="{{$newMangaList->jenis_manga}}"></div>
+                            <div class="{{$newMangaList[0]->jenis_manga}}"></div>
                         </div>
                         <div class="htipe1">
-                            <h3> {{$newMangaList->nama_manga}} </h3>
+                            <h3> {{$newMangaList[0]->nama_manga}} </h3>
                             <div> 
-                                {{$newMangaList->views}} x • 
-                                {{ \Carbon\Carbon::parse($newMangaList->created_at)->diffForHumans() }}
+                                {{$newMangaList[0]->views}} x • 
+                                {{ \Carbon\Carbon::parse($newMangaList[0]->updated_at)->diffForHumans() }}
                             </div>
                         </div>
                     </a> 
-                    <a class="popunder" href="{{url('/manga/'.$newMangaList->slug_manga.'/'.str_replace('.0', '', $newMangaList->episode_chapter))}}" title="{{$newMangaList->nama_manga}} {{$newMangaList->judul_chapter}} Bahasa Indonesia">
+                    <a class="popunder" href="{{url('/manga/'.$newMangaList[0]->slug_manga.'/'.str_replace('.0', '', $newMangaList[0]->episode_chapter))}}" title="{{$newMangaList[0]->nama_manga}} {{$newMangaList[0]->judul_chapter}} Bahasa Indonesia">
                         <span>
-                            <b> {{$newMangaList->judul_chapter}} </b>
+                            <b> {{$newMangaList[0]->judul_chapter}} </b>
                         </span>
                     </a>
                 </div>
