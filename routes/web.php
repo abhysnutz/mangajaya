@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 // HOME
 Route::get('/', 'HomeController@index')->name('home');
 
-
 // TRUNCATE
 Route::get('trun', function(){
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -29,7 +28,6 @@ Route::get('trun', function(){
     DB::table('manga')->truncate();
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 });
-
 
 
 // GRAB
@@ -103,9 +101,12 @@ Route::get('/other/berwarna', 'OtherController@detaiOtherBerwarna');
 // MANGA CATEGORY
 Route::get('/category/manga', 'CategoryController@detailCategoryManga')->name('categoryManga');
 // MANHUA CATEGORY
-Route::get('/category/manhua', 'CategoryController@detailCategoryManhua')->name('categoryManhua');;
+Route::get('/category/manhua', 'CategoryController@detailCategoryManhua')->name('categoryManhua');
 // MANHWA CATEGORY
-Route::get('/category/manhwa', 'CategoryController@detailCategoryManhwa')->name('categoryManhwa');;
+Route::get('/category/manhwa', 'CategoryController@detailCategoryManhwa')->name('categoryManhwa');
+
+// SEARCHING
+Route::get('/searching', 'HomeController@searching');
 
 
 Auth::routes();

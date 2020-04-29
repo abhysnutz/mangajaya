@@ -98,4 +98,26 @@ class HomeController extends Controller
                                   
                                     ]);
     }
+
+    // SEARCHING
+    public function searching(Request $request){
+
+		// menangkap data pencarian
+		$cari = $request->cari;
+
+        $mangaSearch = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
+                                         ->where('nama_manga','like',"%".$cari."%")
+                                         ->get();
+        
+        $page_title = "Hasil Pencarian ".$cari;
+        $web_description = "Pencarian Hasil Pencarian ".$cari;
+        
+		return view('searching')->with([    
+                                            'page_title' => $page_title,
+                                            'web_description' => $web_description,
+                                            'cari' => $cari,
+                                            'mangaSearch' => $mangaSearch,
+                                        ]);
+ 
+	}
 }

@@ -151,11 +151,8 @@
                             <span>Mangajaya</span>
                         </a>
                     </div>
-                    <form class="search_box active" id="search_box" action="/">
-                        <select name="post_type" id="searchform_cat" class="postform" style="display:none">
-                            <option class="level-1" value="manga">Manga</option>
-                        </select>
-                        <input name="s" id="s" placeholder="Mangajaya.com" type="text">
+                    <form class="search_box active" id="search_box" action="searching" method="GET">
+                        <input name="cari" id="s" placeholder="Mangajaya.com" type="text">
                         <input class="search_icon" value="Cari" type="submit">
                     </form>
 
