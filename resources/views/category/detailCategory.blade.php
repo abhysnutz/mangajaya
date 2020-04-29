@@ -125,26 +125,26 @@
             <!-- LOOPING MANGA HARI INI -->
             @foreach($mangaToday as $mangaTodayList)
                 <div class="tpe1_1">
-                    <a href="{{url('/manga/'.$mangaTodayList->slug_manga)}}">
+                    <a href="{{url('/manga/'.$mangaTodayList[0]->slug_manga)}}">
                         <div class="gmb2">
                             <div class="vw Hot"></div>
-                            <img src="{{url('/storage/komik/background_detail/'.$mangaTodayList->slug_manga.'.jpg')}}" style="width:216px; height:132px;" class="rd sd" alt="{{$mangaTodayList->jenis_manga}} {{$mangaTodayList->nama_manga}}">
+                            <img src="{{url('/storage/komik/background_detail/'.$mangaTodayList[0]->slug_manga.'.jpg')}}" style="width:216px; height:132px;" class="rd sd" alt="{{$mangaTodayList[0]->jenis_manga}} {{$mangaTodayList[0]->nama_manga}}">
                             <div class="tpe1_inf">
-                                <b>{{$mangaTodayList->jenis_manga}}</b> 
+                                <b>{{$mangaTodayList[0]->jenis_manga}}</b> 
                             </div>
                         </div>
 
                         <div class="htipe1">
-                            <h3> {{$mangaTodayList->nama_manga}} </h3>
+                            <h3> {{$mangaTodayList[0]->nama_manga}} </h3>
                             <div>
-                                {{$mangaTodayList->views}} x • 
-                                {{ \Carbon\Carbon::parse($mangaTodayList->updated_at)->diffForHumans() }}
+                                {{$mangaTodayList[0]->views}} x • 
+                                {{ \Carbon\Carbon::parse($mangaTodayList[0]->updated_at)->diffForHumans() }}
                             </div>
                         </div>
                     </a>
-                    <a href="{{url('/manga/'.$mangaTodayList->slug_manga.'/'.$mangaTodayList->episode_chapter)}}" title="{{$mangaTodayList->nama_manga}} {{$mangaTodayList->judul_chapter}} Bahasa Indonesia">
+                    <a href="{{url('/manga/'.$mangaTodayList[0]->slug_manga.'/'.$mangaTodayList[0]->episode_chapter)}}" title="{{$mangaTodayList[0]->nama_manga}} {{$mangaTodayList[0]->judul_chapter}} Bahasa Indonesia">
                         <span>
-                            <b>{{$mangaTodayList->judul_chapter}}</b>
+                            <b>{{$mangaTodayList[0]->judul_chapter}}</b>
                         </span>
                     </a>
                 </div>

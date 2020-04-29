@@ -148,14 +148,14 @@
                             <svg class="svg-inline--fa fa-korvue fa-w-14" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="korvue" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 446 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M386.5 34h-327C26.8 34 0 60.8 0 93.5v327.1C0 453.2 26.8 480 59.5 480h327.1c33 0 59.5-26.8 59.5-59.5v-327C446 60.8 419.2 34 386.5 34zM87.1 120.8h96v116l61.8-116h110.9l-81.2 132H87.1v-132zm161.8 272.1l-65.7-113.6v113.6h-96V262.1h191.5l88.6 130.8H248.9z"></path>
                             </svg>
-                            <span>Komiku</span>
+                            <span>Mangajaya</span>
                         </a>
                     </div>
                     <form class="search_box active" id="search_box" action="/">
                         <select name="post_type" id="searchform_cat" class="postform" style="display:none">
                             <option class="level-1" value="manga">Manga</option>
                         </select>
-                        <input name="s" id="s" placeholder="Komiku.co" type="text">
+                        <input name="s" id="s" placeholder="Mangajaya.com" type="text">
                         <input class="search_icon" value="Cari" type="submit">
                     </form>
 
@@ -189,14 +189,14 @@
             </div>
             <nav itemscope="" itemtype="http://www.schema.org/SiteNavigationElement">
                 <ul>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/manga')}}" title="Update Komik Terbaru">Terbaru</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('manga')}}" title="Update Komik Terbaru">Terbaru</a></li>
                     <li itemprop="name"><a itemprop="url" href="#" rel="nofollow">Subscribe <i>(new)</i></a></li>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/daftar-komik')}}" title="Daftar Komik">Daftar Komik</a></li>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/daftar-genre')}}" title="Daftar Genre">Genre</a></li>
-                    <li itemprop="name"><a itemprop="url" href="#" title="Komik One Piece">One Piece</a></li>
-                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Kimetsu no Yaiba">Kimetsu no Yaiba</a></li>
-                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Solo Leveling">Solo Leveling</a></li>
-                    <li itemprop="name"><a itemprop="url" href="#" title="Komik Boruto">Boruto</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('daftar-komik')}}" title="Daftar Komik">Daftar Komik</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('daftar-genre')}}" title="Daftar Genre">Genre</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('manga/one-piece')}}" title="Komik One Piece">One Piece</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('manga/kimetsu-no-yaiba')}}" title="Komik Kimetsu no Yaiba">Kimetsu no Yaiba</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('manga/solo-leveling')}}" title="Komik Solo Leveling">Solo Leveling</a></li>
+                    <li itemprop="name"><a itemprop="url" href="{{url('manga/boruto')}}" title="Komik Boruto">Boruto</a></li>
                 </ul>
             </nav>
         </header>
@@ -352,15 +352,15 @@
             @endif
             <div class="footer perapih">
                 <div class="kn">
-                    <p> Komiku.co.id website baca komik gratis dengan lebih dari 1000 judul komik mulai dari Manga, Manhwa, dan Manhua. </p>
+                    <p> Mangajaya.com website baca komik gratis dengan lebih dari 1000 judul komik mulai dari Manga, Manhwa, dan Manhua. </p>
                     <ul>
-                        <li><a href="https://komiku.co.id/contact/">Contact Us</a></li>
-                        <li><a href="https://komiku.co.id/legal-disclaimer/">Legal Disclaimer</a></li>
-                        <li><a href="https://komiku.co.id/dmca/">DMCA</a></li>
-                        <li><a href="https://komiku.co.id/dmca/">Privacy Policy</a></li>
+                        <li><a href="{{url('contact')}}">Contact Us</a></li>
+                        <li><a href="{{url('disclaimer')}}">Legal Disclaimer</a></li>
+                        <li><a href="{{url('dmca')}}">DMCA</a></li>
+                        <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="kr"> <span>@2019-2020 Komiku.co</span> <span>All right reserved.</span> </div>
+                <div class="kr"> <span>@2019-2020 Mangajaya.com</span> <span>All right reserved.</span> </div>
             </div>
             <!-- <div class="notifikasi" id="Notifikasi" style="background:#f4f4f4;padding-bottom:30px;display:none">
                 <h2>Pusat Notifikasi Komiku</h2>

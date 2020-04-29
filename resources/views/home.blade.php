@@ -81,7 +81,7 @@
         <div class="h2">
             <h2>Pusat Informasi</h2> </div>
         <ul style="padding-left: 20px;">
-            <li>Kurangi keluar rumah, baca komik di <b>Komiku</b> aja karena update lebih dari 50 judul perharinya!</li>
+            <li>Kurangi keluar rumah, baca komik di <b>Mangajaya</b> aja karena update lebih dari 50 judul perharinya!</li>
             <li><b>Solo Leveling</b> dan <b>The Beginning After the End</b> season 1 sudah tamat, akan dilanjutkan beberapa bulan lagi</li>
             <li><b>Apotheosis</b> sudah mentok, akan rilis 1 chapter perminggu, baca juga <b>Martial Peak</b> karena ceritanya mirip dan juga rilis banyak chapter perharinya.</li>
         </ul>
@@ -93,7 +93,7 @@
         <p>Komik-komik yang kamu subscribe di Komiku, diurut berdasarkan update terbarunya.</p>
         <div class="daftar"> <a href="/ikuti/" class="more" style="margin-top: 0;">Lihat semua update komik yang kamu subscribe</a> </div>
     </section> -->
-    <script src="https://komiku.co.id/ikuti-iframe/" async=""></script>
+    <!-- <script src="https://komiku.co.id/ikuti-iframe/" async=""></script> -->
 
     <!-- KOMIK HOT -->
     <section>
@@ -147,7 +147,10 @@
                 <div class="tpe1_1">
                     <a class="popunder" href="{{url('/manga/'.$newMangaList[0]->slug_manga)}}" title="Baca {{$newMangaList[0]->jenis_manga}} {{$newMangaList[0]->nama_manga}}">
                         <div class="gmb2">
-                            <div class="vw Berwarna"> @if($newMangaList[0]->berwarna == 1) Warna @endif </div> 
+                            @if($newMangaList[0]->berwarna == 1 || $newMangaList[0]->hot == 1)
+                                <div class="vw @if($newMangaList[0]->berwarna == 1) Berwarna @endif @if($newMangaList[0]->hot == 1) Hot @endif"> @if($newMangaList[0]->berwarna == 1) Warna @endif </div> 
+                            @endif
+
                             <img src="{{url('/storage/komik/background_detail/'.$newMangaList[0]->slug_manga.'.jpg')}}" style="width:220px; height:134px;" class="rd sd" alt="Komik Online {{$newMangaList[0]->nama_manga}}">
                             <div class="tpe1_inf"> 
                                 <b>{{$newMangaList[0]->konsep_cerita}}</b>
@@ -343,7 +346,7 @@
 
     <aside>
         <h2>Rekomendasi Komik</h2>
-        <p class="ades"> Bingung mau baca komik apa? Cek judul-judul rekomendasi langsung dari Komiku dibawah ini, dijamin seru! </p>
+        <p class="ades"> Bingung mau baca komik apa? Cek judul-judul rekomendasi langsung dari Mangajaya dibawah ini, dijamin seru! </p>
         
         <!-- LOOPING REKOMENDASI KOMIK -->
         @foreach($rekomendasi as $rekomendasiList)

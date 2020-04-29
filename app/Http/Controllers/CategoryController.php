@@ -28,13 +28,22 @@ class CategoryController extends Controller
                                         ->get();
 
         // MANGA UDPATE HARI INI
-        $mangaToday = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
-                                        ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
-                                        ->where('jenis_manga', 'Manga')
-                                        ->whereDay('manga.updated_at', date('d'))
-                                        ->orderBy('manga.updated_at', 'DESC')
-                                        ->limit(12)
-                                        ->get();
+        $id_mangaNewManga = DB::table('manga')->select('manga.id_manga', 'slug_manga')
+                                              ->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                              ->where('jenis_manga', 'Manga')
+                                              ->orderBy('manga.updated_at', 'DESC')
+                                              ->limit(12)
+                                              ->get();
+
+        foreach ($id_mangaNewManga as $value) {
+            $mangaToday[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                            ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
+                                            ->where('manga.id_manga', $value->id_manga)
+                                            ->orderBy('chapter.updated_at', 'DESC')
+                                            ->limit(1)
+                                            ->get();
+        }
 
         // MANGA BY GENRE
         $isekaiGenre = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
@@ -114,13 +123,22 @@ class CategoryController extends Controller
                                         ->get();
 
         // MANGA UDPATE HARI INI
-        $mangaToday = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
-                                        ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
-                                        ->where('jenis_manga', 'Manhua')
-                                        ->whereDay('manga.updated_at', date('d'))
-                                        ->orderBy('manga.updated_at', 'DESC')
-                                        ->limit(12)
-                                        ->get();
+        $id_mangaNewManga = DB::table('manga')->select('manga.id_manga', 'slug_manga')
+                                              ->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                              ->where('jenis_manga', 'Manhua')
+                                              ->orderBy('manga.updated_at', 'DESC')
+                                              ->limit(12)
+                                              ->get();
+
+        foreach ($id_mangaNewManga as $value) {
+            $mangaToday[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                            ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
+                                            ->where('manga.id_manga', $value->id_manga)
+                                            ->orderBy('chapter.updated_at', 'DESC')
+                                            ->limit(1)
+                                            ->get();
+        }
 
         // MANGA BY GENRE
         $isekaiGenre = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
@@ -198,13 +216,22 @@ class CategoryController extends Controller
                                         ->get();
 
         // MANGA UDPATE HARI INI
-        $mangaToday = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
-                                        ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
-                                        ->where('jenis_manga', 'Manhwa')
-                                        ->whereDay('manga.updated_at', date('d'))
-                                        ->orderBy('manga.updated_at', 'DESC')
-                                        ->limit(12)
-                                        ->get();
+        $id_mangaNewManga = DB::table('manga')->select('manga.id_manga', 'slug_manga')
+                                              ->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                              ->where('jenis_manga', 'Manhwa')
+                                              ->orderBy('manga.updated_at', 'DESC')
+                                              ->limit(12)
+                                              ->get();
+
+        foreach ($id_mangaNewManga as $value) {
+            $mangaToday[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                            ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
+                                            ->where('manga.id_manga', $value->id_manga)
+                                            ->orderBy('chapter.updated_at', 'DESC')
+                                            ->limit(1)
+                                            ->get();
+        }
 
         // MANGA BY GENRE
         $isekaiGenre = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')

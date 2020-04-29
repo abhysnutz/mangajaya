@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     
     public function index(){
+
         $page_title = "Baca Komik Gratis Bahasa Indonesia";
         $web_description = "Mangajaya adalah website preview baca komik online gratis berbahasa Indonesia. Kalian bisa membaca preview Komik Jepang, Komik Korea, dan Komik China secara gratis di Mangajaya!";
 
@@ -34,7 +35,7 @@ class HomeController extends Controller
             $newManga[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                             ->join('other', 'other.id_manga', '=', 'manga.id_manga')
                                             ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
-                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'berwarna', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
+                                            ->select('manga.id_manga', 'manga.updated_at', 'nama_manga', 'slug_manga', 'konsep_cerita', 'berwarna', 'hot', 'jenis_manga', 'views', 'episode_chapter', 'judul_chapter')
                                             ->where('manga.id_manga', $value->id_manga)
                                             ->orderBy('chapter.updated_at', 'DESC')
                                             ->limit(1)

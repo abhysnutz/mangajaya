@@ -7,12 +7,12 @@
             <meta itemprop="position" content="1"> 
         </li> <span class="pl5 pr5">»</span>
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-            <a itemtype="http://schema.org/Thing" itemprop="item" href="https://komiku.co.id/manga/martial-peak/"> 
+            <a itemtype="http://schema.org/Thing" itemprop="item" href="{{url('manga/'.$detail_manga->slug_manga)}}"> 
             <span itemprop="name">{{$detail_manga->nama_manga}}</span> </a>
             <meta itemprop="position" content="2"> 
         </li> <span class="pl5 pr5">»</span>
         <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-            <a itemtype="http://schema.org/Thing" itemprop="item" href="https://komiku.co.id/martial-peak-chapter-347/"> 
+            <a itemtype="http://schema.org/Thing" itemprop="item" href="{{url('manga/'.$detail_manga->slug_manga.'/'.str_replace('.0', '', $detail_manga->episode_chapter))}}"> 
             <span itemprop="name"> {{$detail_manga->judul_chapter}}</span> </a>
             <meta itemprop="position" content="3"> 
         </li>
@@ -94,13 +94,17 @@
                         }
                     </style>
                 </noscript>
-                <p> <b>{{$detail_manga->jenis_manga}} {{$detail_manga->nama_manga}} Chapter {{str_replace('.0', '', $detail_manga->episode_chapter)}}</b> Indo rilis hari
-                    <time class="post-date" datetime="2020-04-26T6:53:53+07:00">Minggu, 26 April 2020</time>. </p>
-                <script type="text/javascript" src="https://iklan.komiku.co.id/iklan.php"></script>
+                <p> 
+                    <b>{{$detail_manga->jenis_manga}} {{$detail_manga->nama_manga}} Chapter {{str_replace('.0', '', $detail_manga->episode_chapter)}}</b> 
+                    <!-- Indo rilis hari -->
+                    <!-- <time class="post-date" datetime="2020-04-26T6:53:53+07:00">Minggu, 26 April 2020</time>.  -->
+                </p>
             </div>
             <footer class="perapih chf" style="margin-bottom:15px">
                 <div class="rlt">
-                    <h4> Rekomendasi Komik <span class="biru">{{$detail_manga->konsep_cerita}}</span> Lain </h4>
+                    <h4> Rekomendasi Komik 
+                         <span class="biru">{{$detail_manga->konsep_cerita}}</span> Lain 
+                    </h4>
                     
                     <!-- LOOPING REKOMENDASI -->
                     @foreach($detail_kategori as $detail_kategoriList)
@@ -137,14 +141,15 @@
                     <ul class="perapih">
                         <li>
                             <a href="https://komiku.co.id/one-piece-chapter-967/?komentar">
-                                <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="comments" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                                <!-- <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="comments" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
                                     <path fill="currentColor" d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"></path>
-                                </svg> 3 <span>Komentar</span> <b>+ADD</b>
+                                </svg>  -->
+                                <!-- 3 <span>Komentar</span> <b>+ADD</b> -->
                             </a>
                         </li>
                         @if($detail_manga->episode_chapter < $maxChapterManga)
                             <li class="rl">
-                                <a href="https://komiku.co.id/one-piece-chapter-968/" class="rl">
+                                <a href="{{url('manga/'.$detail_manga->slug_manga.'/'.$next)}}" class="rl">
                                     <span> Ch. {{$next}} </span>
                                 </a>
                             </li>
@@ -152,7 +157,7 @@
 
                         @if($detail_manga->episode_chapter > $minChapterManga)
                         <li class="rl">
-                            <a href="https://komiku.co.id/one-piece-chapter-966-indo/" class="rl"> 
+                            <a href="{{url('manga/'.$detail_manga->slug_manga.'/'.$prev)}}" class="rl"> 
                                 <span> Ch. {{$prev}} </span>
                             </a>
                         </li>
@@ -161,12 +166,12 @@
                     </ul>
                 </div>
 
-                <div class="subscribe">
+                <!-- <div class="subscribe">
                     <a href="https://komiku.co.id/manga/martial-peak/?ikuti" target="_blank" rel="nofollow noopenner">Subscribe</a>
                     <a href="#article">Ke atas</a>
-                </div>
+                </div> -->
             </footer>
-            <div class="brk sd">
+            <!-- <div class="brk sd">
                 <div class="brk1" id="Chapter_Berikutnya">
                     <div class="nxt"> Chapter Berikutnya </div>
                     <p> Chapter berikutnya belum tersedia, baca komik rekomendasi sejenis dibawah halaman ini. </p> <a href="https://komiku.co.id/manga/martial-peak/" class="la" title="Komik Martial Peak">Semua Chapter </a> <a href="https://pdf.komiku.co.id/martial-peak-chapter-347/" target="_blank" rel="nofollow" class="la">Download PDF |</a> </div>
@@ -176,44 +181,8 @@
                         <div class="nm"> Yudha </div>
                         <p class="is"> Ayo lanjutkan min... </p>
                     </div>
-                    <div class="km">
-                        <div class="nm"> B4nk4i </div>
-                        <p class="is"> Mantul min... Ttes semangat biarpun tnpa penyemangat 😅✌️ </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Fikri </div>
-                        <p class="is"> Up min plis yo </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Ken shi </div>
-                        <p class="is"> Terima kasih update terbaru nya tetap semangat 💪💪 up up lagiii dan lagi 🙏😘 </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Andi </div>
-                        <p class="is"> Mantap kali semangat terus ya mun.. </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Devista </div>
-                        <p class="is"> Lanjut min </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Mr. Zaw </div>
-                        <p class="is"> Semangat up lg min...!!! </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> SiKomo </div>
-                        <p class="is"> Lanjoot min </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Anjay </div>
-                        <p class="is"> Up lagi min </p>
-                    </div>
-                    <div class="km">
-                        <div class="nm"> Adhy </div>
-                        <p class="is"> Akhirx up juga </p>
-                    </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         
 
@@ -227,26 +196,23 @@
                             <th class="judulseries">Chapter Lain</th>
                             <th class="tanggalseries">Tanggal Rilis</th>
                         </tr>
-                        <tr class="curr">
-                            <td class="judulseries"><a href="https://komiku.co.id/martial-peak-chapter-347/" title="Komik Martial Peak Chapter 347 Indonesia"><span>Martial Peak</span> Chapter 347</a></td>
-                            <td class="tanggalseries">
-                                <time class="post-date" datetime="2020-04-26T3:03:00+00:00">3 jam lalu</time>
-                            </td>
-                        </tr>
+                        
+                        @foreach($footerChapter as $footerChapterList)
+                            <tr @if(str_replace('.0', '', $footerChapterList->episode_chapter) == str_replace('.0', '', $detail_manga->episode_chapter)) class="curr" @endif>
+                                <td class="judulseries">
+                                    <a href="{{url('manga/'.$footerChapterList->slug_manga.'/'.str_replace('.0', '', $footerChapterList->episode_chapter))}}" title="Komik {{$footerChapterList->nama_manga}} {{$footerChapterList->judul_chapter}} Indonesia">
+                                        <span>{{$footerChapterList->nama_manga}}</span>
+                                        {{$footerChapterList->judul_chapter}}
+                                    </a>
+                                </td>
+                                <td class="tanggalseries">
+                                    <time class="post-date" datetime="2020-04-26T3:03:00+00:00">{{ \Carbon\Carbon::parse($footerChapterList->updated_at)->diffForHumans() }}</time>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
                         <tr>
-                            <td class="judulseries"><a href="https://komiku.co.id/martial-peak-chapter-346/" title="Komik Martial Peak Chapter 346 Indonesia"><span>Martial Peak</span> Chapter 346</a></td>
-                            <td class="tanggalseries">
-                                <time class="post-date" datetime="2020-04-26T3:03:00+00:00">6 jam lalu</time>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="judulseries"><a href="https://komiku.co.id/martial-peak-chapter-345/" title="Komik Martial Peak Chapter 345 Indonesia"><span>Martial Peak</span> Chapter 345</a></td>
-                            <td class="tanggalseries">
-                                <time class="post-date" datetime="2020-04-26T3:03:00+00:00">10 jam lalu</time>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="judulseries"><a href="https://komiku.co.id/manga/martial-peak/" title="Komik Martial Peak">Martial Peak</a></td>
+                            <td class="judulseries"><a href="{{url('manga'.$detail_manga->slug_manga)}}" title="Komik {{$detail_manga->nama_manga}}">{{$detail_manga->nama_manga}}</a></td>
                             <td class="tanggalseries">Semua chapter</td>
                         </tr>
                     </tbody>

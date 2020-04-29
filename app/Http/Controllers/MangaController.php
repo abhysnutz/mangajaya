@@ -83,6 +83,7 @@ class MangaController extends Controller
                                                            ->get();
         
         $chapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                            ->select('slug_manga', 'nama_manga', 'episode_chapter', 'judul_chapter', 'chapter.updated_at')
                                             ->where('manga.slug_manga', $slug_manga)
                                             ->orderBy('episode_chapter', 'DESC')
                                             ->get();
@@ -146,7 +147,14 @@ class MangaController extends Controller
  
         $negara =   $detail_chapter[0]->jenis_manga == 'Manga' ? 'Jepang' : 
                         ($detail_chapter[0]->jenis_manga == 'Manhua' ? 'China' : 'Korea');
-        
+
+        $footerChapter =  DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                             ->select('nama_manga', 'slug_manga', 'judul_chapter', 'chapter.updated_at', 'episode_chapter')
+                                             ->where('manga.slug_manga', $slug_manga)
+                                             ->orderBy('chapter.updated_at', 'DESC')
+                                             ->limit(4)
+                                             ->get();
+                                            
 
         $page_title = "Komik ".$detail_chapter[0]->nama_manga." ".$detail_chapter[0]->judul_chapter;
         $web_description = "Baca Komik ".$detail_chapter[0]->nama_manga." ".$detail_chapter[0]->judul_chapter." dalam bahasa Indonesia di Mangajaya! ".$detail_chapter[0]->nama_manga." ".$detail_chapter[0]->judul_chapter.".";
@@ -160,6 +168,7 @@ class MangaController extends Controller
                                                 'negara' => $negara,
                                                 'maxChapterManga' => $maxChapterManga,
                                                 'minChapterManga' => $minChapterManga,
+                                                'footerChapter' => $footerChapter,
                                             ]);
     }
 

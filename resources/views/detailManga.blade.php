@@ -183,7 +183,7 @@
         <!-- END CHAPTER -->
 
         <!-- KOMENTAR -->
-        <section id="Komentar">
+        <!-- <section id="Komentar">
             <div class="brk1 brk2">
                 <div class="nxt"> 115 Komentar <a href="https://komiku.co.id/manga/one-piece/?komentar" class="mre sd rd">Buat Komentar</a> </div>
                 <div class="km">
@@ -198,7 +198,7 @@
                     <div class="nm"> Hari subekti </div>
                     <p class="is"> tdk sabar liat pertarungannya hh~ </p>
                 </div> <a href="https://komiku.co.id/manga/one-piece/?komentar" class="ak biru">Semua komentar »</a> </div>
-        </section>
+        </section> -->
         <!-- END KOMENTAR -->
 
         <!-- SIDEBAR -->
