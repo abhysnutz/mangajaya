@@ -209,13 +209,20 @@
                 <div class="grd">
                     <a href="{{url('manga/'.$similarMangaList->slug_manga)}}" title="Komik {{$similarMangaList->nama_manga}}" class="popunder">
                         <div class="gmbr1">
-                            <div class="vw hot"> 🔥 417 rb x </div> 
+                            <div class="vw @if($similarMangaList->hot == 1) hot @endif"> 
+                                @if($similarMangaList->hot == 1) 🔥 @endif  
+                                {{$similarMangaList->views}} x 
+                            </div> 
                             <img src="{{url('/storage/komik/background_detail/'.$similarMangaList->slug_manga.'.jpg')}}">
-                            <div class="tpe1_inf"> <b>{{$similarMangaList->jenis_manga}}</b> {{$similarMangaList->konsep_cerita}} </div>
+                            <div class="tpe1_inf"> 
+                                <b>{{$similarMangaList->jenis_manga}}</b> 
+                                {{$similarMangaList->konsep_cerita}}
+                            </div>
                         </div>
-                        <h4> {{$similarMangaList->nama_manga}} </h4> </a>
+                        <h4> {{$similarMangaList->nama_manga}} </h4> 
+                    </a>
                     <p>                            
-                    {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $similarMangaList->sinopsis))[1])[0] }}
+                        {{ explode('</li>', explode('<li>', $similarManga[2]->sinopsis)[1])[0] }}
                     </p>
                 </div>
             @endforeach

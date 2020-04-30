@@ -89,6 +89,7 @@ class MangaController extends Controller
                                             ->get();
         
         $similarManga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
+                                          ->join('other', 'manga.id_manga', '=', 'other.id_manga')
                                           ->where('konsep_cerita', $detailManga[0]->konsep_cerita)
                                           ->where('jenis_manga', $detailManga[0]->jenis_manga)
                                           ->where('manga.id_manga', '!=', $detailManga[0]->id_manga)
@@ -104,8 +105,8 @@ class MangaController extends Controller
                                                ->min('episode_chapter');
         
         $page_title = $detailManga[0]->nama_manga;
-        $web_description = "Baca Komik ".$detailManga[0]->nama_manga." bahasa Indonesia di Mangajaya. ".$detailManga[0]->jenis_manga." ".$detailManga[0]->judul_indo." bercerita tentang ".$detailManga[0]->judul_indo." ".explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $detailManga[0]->sinopsis))[1])[0];
-        
+        $web_description = "Baca Komik ".$detailManga[0]->nama_manga." bahasa Indonesia di Mangajaya. ".$detailManga[0]->jenis_manga." ".$detailManga[0]->judul_indo." bercerita tentang ".$detailManga[0]->judul_indo." ".explode('</li>', explode('<li>', $detailManga[0]->sinopsis)[1])[0];
+
         return view('detailManga')->with([
                                             'page_title' => $page_title,
                                             'web_description' => $web_description,

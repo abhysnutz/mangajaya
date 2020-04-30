@@ -200,7 +200,7 @@
         </style>
     </head>
 
-    <body class="dark" {{Route::currentRouteName() == 'detailManga' ? 'class=series' : ''}} {{Route::currentRouteName() == 'detailChapter' ? 'onclick=myFunction()' : ''}} >
+    <body  @if(Route::currentRouteName() == 'detailManga') class="series dark" @else class="dark" @endif {{Route::currentRouteName() == 'detailChapter' ? 'onclick=myFunction()' : ''}}  >
         <header id="header">
             <div class="hd2">
                 <div class="perapih">
@@ -319,7 +319,7 @@
         @endif
 
         <!-- KONTEN -->
-        <main {{Route::currentRouteName() == 'detailChapter' || Route::currentRouteName() == 'settingPrivacy' || Route::currentRouteName() == 'settingContact' || Route::currentRouteName() == 'settingDisclaimer' || Route::currentRouteName() == 'settingDmca' ? '' : 'class=perapih'}}>
+        <main {{Route::currentRouteName() == 'detailChapter' ? '' : 'class=perapih'}}>
             @yield('konten')
         </main>
         <!-- END KONTEN -->

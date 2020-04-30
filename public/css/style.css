@@ -770,12 +770,20 @@ body.dark .at h3 {
     font-family: segoe ui
 }
 
+body.dark .dsk2 {
+    background: #000;
+}
+
 tr.curr {
     font-weight: 700
 }
 
 #Chapter_Lainnya a {
     color: #434343
+}
+
+body.dark #Chapter_Lainnya a {
+    color: #cccccc
 }
 
 #Chapter_Lainnya {
@@ -787,7 +795,8 @@ aside#Terkait {
     padding: 10px
 }
 
-#Chapter_Lainnya .curr a {
+#Chapter_Lainnya .curr a,
+body.dark #Chapter_Lainnya .curr a {
     color: #4161b2
 }
 
@@ -809,9 +818,16 @@ aside#Terkait {
     box-shadow: rgba(0, 0, 0, .2) 0 0 4px 0
 }
 
+.series.dark header.jds {
+    background: #000 !important;
+}
 table.inftable td:nth-child(1) {
     background: #f4f4f4;
     font-size: 13px
+}
+
+body.dark table.inftable td:nth-child(1) {
+    background: #272727;
 }
 
 ul.genre li a {
@@ -894,6 +910,10 @@ header.jds h1 {
     color: #444
 }
 
+body.dark #article h1 {
+    color: rgb(211, 211, 211)
+}
+
 .index section .h2 {
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px
@@ -916,6 +936,11 @@ ul.brd span {
     color: #666;
     font-weight: 600;
     font-family: segoe ui
+}
+
+body.dark ul.brd li a,
+body.dark ul.brd span {
+    color: rgb(204, 204, 204);
 }
 
 .gmbr1 {
@@ -960,6 +985,10 @@ table.tbl {
     background: #fafafa
 }
 
+body.dark .tbl td:nth-child(1) {
+    background: #0e0e0e
+}
+
 ul.second_nav li {
     font-family: arial;
     font-size: 15px;
@@ -992,6 +1021,10 @@ ul.second_nav li {
     max-width: calc(100% - 40px)
 }
 
+body.dark #article aside {
+    background: #000;
+}
+
 .brkn img {
     float: left;
     margin-right: 10px
@@ -1020,6 +1053,10 @@ p.top1 {
     width: 100%;
     background: #fff;
     margin: 15px 0
+}
+
+body.dark .new {
+    background: #000;
 }
 
 .new1 {
@@ -1128,6 +1165,10 @@ a.mr {
     background: #fff
 }
 
+body.dark .rlt1 {
+    background: #000
+}
+
 .rlt1 img {
     width: 100%
 }
@@ -1176,10 +1217,18 @@ table.chapter th {
     font-size: 15px
 }
 
+body.dark table.chapter th {
+    background: #4c4c4c;
+}
+
 td.tanggalseries {
     text-align: center;
     font-size: 12px;
     color: #898989
+}
+
+body.dark td.tanggalseries {
+    color: #a9a9a9
 }
 
 a.smr {
@@ -1271,6 +1320,10 @@ body.dark .grd span {
     font-size: 13px;
     color: #777;
     margin-top: 3px
+}
+
+.tpe span:nth-child(2) {
+    color: rgb(172, 172, 172);
 }
 
 .rlt h4 {
@@ -1399,6 +1452,10 @@ body.dark button.tab.curr {
     font-size: 13px
 }
 
+body.dark .nm {
+    color: #666;
+}
+
 p.is {
     margin: 5px 0
 }
@@ -1520,6 +1577,10 @@ table.chapter .dl a {
     color: #4c4c4c
 }
 
+body.dark table.chapter .dl a {
+    color: #acacac
+}
+
 .nvb {
     bottom: 0;
     left: 0;
@@ -1616,6 +1677,10 @@ ul.nvb a {
     font-weight: 700;
     line-height: 39px;
     margin-right: 5px
+}
+
+body.dark .nav_apb a {
+    background: #161616;
 }
 
 .nvb a {
@@ -2285,6 +2350,9 @@ footer.perapih.chf {
     section#Komentar {
         background: #fafafa;
         border-top: 0
+    }
+    body.dark section#Komentar {
+        background: #080808;
     }
     .series section {
         padding: 20px 15px
