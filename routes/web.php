@@ -108,6 +108,12 @@ Route::get('/category/manhwa', 'CategoryController@detailCategoryManhwa')->name(
 // SEARCHING
 Route::get('/searching', 'HomeController@searching');
 
+// SETTING
+Route::get('privacy-policy', 'SettingController@privacyPolicy')->name('settingPrivacy');
+Route::get('contact', 'SettingController@contactUs')->name('settingContact');
+Route::get('disclaimer', 'SettingController@disclaimer')->name('settingDisclaimer');
+Route::get('dmca', 'SettingController@dmca')->name('settingDmca');
+
 
 Auth::routes();
 

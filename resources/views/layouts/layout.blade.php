@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id" {{Route::currentRouteName() == 'detailManga' || Route::currentRouteName() == 'detailChapter' ? '' :  (Route::currentRouteName() == 'detailGenre' ? 'class=index terbaru' : 'class=index terbaru daftar')}}>
+<html lang="id" {{Route::currentRouteName() == 'detailManga' || Route::currentRouteName() == 'detailChapter' || Route::currentRouteName() == 'settingPrivacy' || Route::currentRouteName() == 'settingContact' || Route::currentRouteName() == 'settingDisclaimer' || Route::currentRouteName() == 'settingDmca' ? '' :  (Route::currentRouteName() == 'detailGenre' ? 'class=index terbaru' : 'class=index terbaru daftar')}}>
     <head>
         <meta charset="UTF-8">
         <meta name="referrer" content="no-referrer-when-downgrade">
@@ -29,6 +29,67 @@
 
         <meta name="theme-color" content="#fff">
         <style rel="stylesheet" type="text/css" media="screen">
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 32px;
+                height: 14px;
+                top: 3px;
+                left: -3px;
+            }
+
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 10px;
+                width: 10px;
+                left: 3px;
+                bottom: 2px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(15px);
+                -ms-transform: translateX(15px);
+                transform: translateX(15px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
             a.mobileads {
                 display: none
             }
@@ -139,7 +200,7 @@
         </style>
     </head>
 
-    <body {{Route::currentRouteName() == 'detailManga' ? 'class=series' : ''}} {{Route::currentRouteName() == 'detailChapter' ? 'onclick=myFunction()' : ''}} >
+    <body class="dark" {{Route::currentRouteName() == 'detailManga' ? 'class=series' : ''}} {{Route::currentRouteName() == 'detailChapter' ? 'onclick=myFunction()' : ''}} >
         <header id="header">
             <div class="hd2">
                 <div class="perapih">
@@ -148,11 +209,11 @@
                             <svg class="svg-inline--fa fa-korvue fa-w-14" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="korvue" role="img" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 446 512" data-fa-i2svg="">
                                 <path fill="currentColor" d="M386.5 34h-327C26.8 34 0 60.8 0 93.5v327.1C0 453.2 26.8 480 59.5 480h327.1c33 0 59.5-26.8 59.5-59.5v-327C446 60.8 419.2 34 386.5 34zM87.1 120.8h96v116l61.8-116h110.9l-81.2 132H87.1v-132zm161.8 272.1l-65.7-113.6v113.6h-96V262.1h191.5l88.6 130.8H248.9z"></path>
                             </svg>
-                            <span>Mangajaya</span>
+                            <span>Komikjaya</span>
                         </a>
                     </div>
                     <form class="search_box active" id="search_box" action="searching" method="GET">
-                        <input name="cari" id="s" placeholder="Mangajaya.com" type="text">
+                        <input name="cari" id="s" placeholder="Komikjaya.com" type="text">
                         <input class="search_icon" value="Cari" type="submit">
                     </form>
 
@@ -181,6 +242,15 @@
                                 <span>Berwarna</span>
                             </a>
                         </li>
+                        <div style="position: relative; left: -101px; top: 10px; ">
+                                <span style="float:left; "> <b> Light / Dark </b></span>
+                                
+                                <label class="switch" style="float:left; margin-left:10px;">
+                                    <input type="checkbox" id="myCheck"  onclick="darkLightFunction()" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                        </div>
+
                     </ul>
                 </div>
             </div>
@@ -249,7 +319,7 @@
         @endif
 
         <!-- KONTEN -->
-        <main {{Route::currentRouteName() == 'detailChapter' ? '' : 'class=perapih'}}>
+        <main {{Route::currentRouteName() == 'detailChapter' || Route::currentRouteName() == 'settingPrivacy' || Route::currentRouteName() == 'settingContact' || Route::currentRouteName() == 'settingDisclaimer' || Route::currentRouteName() == 'settingDmca' ? '' : 'class=perapih'}}>
             @yield('konten')
         </main>
         <!-- END KONTEN -->
@@ -349,7 +419,7 @@
             @endif
             <div class="footer perapih">
                 <div class="kn">
-                    <p> Mangajaya.com website baca komik gratis dengan lebih dari 1000 judul komik mulai dari Manga, Manhwa, dan Manhua. </p>
+                    <p> Komikjaya.com website baca komik gratis dengan lebih dari 1000 judul komik mulai dari Manga, Manhwa, dan Manhua. </p>
                     <ul>
                         <li><a href="{{url('contact')}}">Contact Us</a></li>
                         <li><a href="{{url('disclaimer')}}">Legal Disclaimer</a></li>
@@ -357,7 +427,7 @@
                         <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="kr"> <span>@2019-2020 Mangajaya.com</span> <span>All right reserved.</span> </div>
+                <div class="kr"> <span>@2019-2020 Komikjaya.com</span> <span>All right reserved.</span> </div>
             </div>
             <!-- <div class="notifikasi" id="Notifikasi" style="background:#f4f4f4;padding-bottom:30px;display:none">
                 <h2>Pusat Notifikasi Komiku</h2>
@@ -474,5 +544,17 @@
             <div style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:9999999;display:none;"></div>
         @endif
 
+        <script type="text/javascript">
+            function darkLightFunction() {
+                var checkBox = document.getElementById("myCheck");
+                var element = document.body;
+
+                if (checkBox.checked == true){
+                    element.classList.add("dark");
+                } else {
+                    element.classList.remove("dark");
+                }
+            }
+        </script>
     </body>
 </html>
