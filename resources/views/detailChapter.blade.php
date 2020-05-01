@@ -189,7 +189,9 @@
         <aside class="ch rd sd" id="Terkait">
             <div class="df"> <img src="{{url('/storage/komik/background_detail/'.$detail_manga->slug_manga.'.jpg')}}" alt="Baca Komik Martial Peak" class="asm sd" style="height:130px; width:230px;">
                 <h3> Komik {{$detail_manga->nama_manga}} </h3>
-                <p> {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $detail_manga->sinopsis))[1])[0] }} </p>
+                <p> 
+                    {{ explode('</li>', explode('<li>', $detail_manga->sinopsis)[1])[0] }}
+                </p>
                 <table class="chapter" id="Chapter_Lainnya">
                     <tbody class="_3Rsjq" data-test="chapter-table">
                         <tr>

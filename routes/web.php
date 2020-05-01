@@ -31,10 +31,24 @@ Route::get('trun', function(){
 
 
 // GRAB
+// GRAB INTI
 // melakukan grab pada manga terbaru (DB MANGA)
 Route::get('/grab/newmanga/{page?}', 'GrabController@newManga');
+// melakukan grab pada halaman home komiku
+Route::get('/grab/homemanga/', 'GrabController@homeManga');
+
+
+// GRAB MANUAL
 // melakukan grab pada daftar manga (DB MANGA)
-Route::get('/grab/daftarmanga', 'GrabController@daftarManga');
+Route::get('/grab/daftarmanga/{page?}', 'GrabController@daftarManga');
+// melakukan grab pada daftar chapter (DB CHAPTER)
+Route::get('/grab/daftarchapter/{id_manga}', 'GrabController@daftarChapter');
+// melakukan grab pada gambar by ID CHAPTER JUST 1 (DB GAMBAR)
+Route::get('/grab/daftargambar/{id_chapter}', 'GrabController@daftarGambar');
+// melakukan grab pada gambar by ID CHAPTER JUST 1 (DB GAMBAR)
+Route::get('/grab/daftargambarsemua/{awal}/{akhir}', 'GrabController@daftarGambarSemua');
+
+
 // melakukan grab pada detail manga (DB DETAIL MANGA)
 Route::get('/grab/detaildaftarmanga', 'GrabController@detailDaftarManga');
 // melakukan grab pada detail spoiler image (DB SPOILER IMAGE)

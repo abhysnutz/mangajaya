@@ -7,7 +7,11 @@
 
                 <!-- LOOP KATEGORI -->
                 @foreach($kategori as $kategoriList)
-                    <li><a href="{{url('genre/'.$kategoriList->slug_kategori)}}" title="Komik Genre {{$kategoriList->nama_kategori}}">{{$kategoriList->nama_kategori}}</a></li>
+                    <li>
+                        <a href="{{url('genre/'.$kategoriList->slug_kategori)}}" title="Komik Genre {{$kategoriList->nama_kategori}}">
+                            {{$kategoriList->nama_kategori}}
+                        </a>
+                    </li>
                 @endforeach
                 <!-- END LOOP KATEGORI -->
 

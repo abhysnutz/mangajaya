@@ -100,7 +100,7 @@
                         {{ \Carbon\Carbon::parse($terpopuler->updated_at)->diffForHumans() }}
                     </span>
                     <p>
-                        {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $terpopuler->sinopsis))[1])[0] }}
+                        {{ explode('</li>', explode('<li>', $terpopuler->sinopsis)[1])[0] }}
                     </p>
                     <div class="mree">
                         <a href="{{url('/manga/'.$terpopuler->slug_manga)}}" class="mla rd sd" title="Baca {{$terpopuler->jenis_manga}} {{$terpopuler->nama_manga}}">
@@ -323,7 +323,8 @@
                     {{ \Carbon\Carbon::parse($rekomendasiList->updated_at)->diffForHumans() }}</span>
                 </a>
                 <p>
-                {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $rekomendasiList->sinopsis))[1])[0] }} </p>
+                    {{ explode('</li>', explode('<li>', $rekomendasiList->sinopsis)[1])[0] }}
+                </p>
             </div>
         @endforeach
         <!-- END LOOPING REKOMENDASI -->

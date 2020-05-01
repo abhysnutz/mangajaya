@@ -52,7 +52,7 @@
 
                         <!-- SINOPSIS SINGKAT -->
                         <p>
-                            {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $mangaList->sinopsis))[1])[0] }}
+                            {{ explode('</li>', explode('<li>', $mangaList->sinopsis)[1])[0] }}
                         </p>
                            
                         <div class="mree">

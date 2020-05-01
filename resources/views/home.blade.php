@@ -368,7 +368,9 @@
                         @if($rekomendasiList->berwarna == 1) Berwarna @endif
                     </span>
                 </a>
-                <p> {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $rekomendasiList->sinopsis))[1])[0] }} </p>
+                <p> 
+                    {{ explode('</li>', explode('<li>', $rekomendasiList->sinopsis)[1])[0] }}
+                </p>
             </div>
         @endforeach
         <!-- END LOOPING REKOMENDASI KOMIK -->

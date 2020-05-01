@@ -20,7 +20,9 @@
                                 {{$mangaSearchList->views}} x •
                                 {{ \Carbon\Carbon::parse($mangaSearchList->created_at)->diffForHumans() }}
                             </span>
-                            <p> {{ explode('</li>', explode('<ul class="rs"> <li>', str_replace('<ul class="rs"><li>', '<ul class="rs"> <li>', $mangaSearchList->sinopsis))[1])[0] }} </p>
+                            <p> 
+                                {{ explode('</li>', explode('<li>', $mangaSearchList->sinopsis)[1])[0] }}
+                            </p>
                         </div>
                     </a>
                 </div>
