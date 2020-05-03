@@ -50,7 +50,7 @@ class MangaController extends Controller
         $page_title = "Daftar Komik";
         $web_description = "Daftar Komik terlengkap yang tersedia di Mangajaya, semua berbahasa Indonesia dengan kualitas gambar HD.";
 
-        $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W' );
+        $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
         foreach ($char as $abjad) {
             $manga[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                          ->where('nama_manga', 'like', $abjad.'%')
@@ -85,7 +85,7 @@ class MangaController extends Controller
         $chapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
                                             ->select('slug_manga', 'nama_manga', 'episode_chapter', 'judul_chapter', 'chapter.updated_at')
                                             ->where('manga.slug_manga', $slug_manga)
-                                            ->orderBy('episode_chapter', 'DESC')
+                                            ->orderBy('id_chapter', 'DESC')
                                             ->get();
         
         $similarManga = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
@@ -96,13 +96,21 @@ class MangaController extends Controller
                                           ->limit(3)
                                           ->get();
 
-        $maxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+        $idMaxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
                                                ->where('manga.slug_manga', $slug_manga)
-                                               ->max('episode_chapter');
+                                               ->max('id_chapter');
+
+        $maxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                                ->where('id_chapter', $idMaxChapterManga)
+                                                ->get();
+
+        $idMinChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                               ->where('manga.slug_manga', $slug_manga)
+                                               ->min('id_chapter');
 
         $minChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
-                                               ->where('manga.slug_manga', $slug_manga)
-                                               ->min('episode_chapter');
+                                                ->where('id_chapter', $idMinChapterManga)
+                                                ->get();
         
         $page_title = $detailManga[0]->nama_manga;
         $web_description = "Baca Komik ".$detailManga[0]->nama_manga." bahasa Indonesia di Mangajaya. ".$detailManga[0]->jenis_manga." ".$detailManga[0]->judul_indo." bercerita tentang ".$detailManga[0]->judul_indo." ".explode('</li>', explode('<li>', $detailManga[0]->sinopsis)[1])[0];
@@ -115,8 +123,8 @@ class MangaController extends Controller
                                             'detailKategoriManga' => $detailKategoriManga,
                                             'chapterManga' => $chapterManga,
                                             'similarManga' => $similarManga,
-                                            'maxChapterManga' => $maxChapterManga,
-                                            'minChapterManga' => $minChapterManga,                                    
+                                            'maxChapterManga' => $maxChapterManga[0],
+                                            'minChapterManga' => $minChapterManga[0],                                    
                                         ]);
     }
 
@@ -138,14 +146,23 @@ class MangaController extends Controller
                                              ->limit(4)
                                              ->get();
 
-        $maxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+        $idMaxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
                                                ->where('manga.slug_manga', $slug_manga)
-                                               ->max('episode_chapter');
+                                               ->max('id_chapter');
+
+        $maxChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                                ->where('id_chapter', $idMaxChapterManga)
+                                                ->get();                                               
+
+        $idMinChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
+                                               ->where('manga.slug_manga', $slug_manga)
+                                               ->min('id_chapter');
 
         $minChapterManga = DB::table('chapter')->join('manga', 'manga.id_manga', '=', 'chapter.id_manga')
-                                               ->where('manga.slug_manga', $slug_manga)
-                                               ->min('episode_chapter');
- 
+                                                ->where('id_chapter', $idMinChapterManga)
+                                                ->get();                                                   
+        
+
         $negara =   $detail_chapter[0]->jenis_manga == 'Manga' ? 'Jepang' : 
                         ($detail_chapter[0]->jenis_manga == 'Manhua' ? 'China' : 'Korea');
 
@@ -167,8 +184,10 @@ class MangaController extends Controller
                                                 'gambar' => $detail_chapter,
                                                 'detail_kategori' => $detail_kategori,
                                                 'negara' => $negara,
-                                                'maxChapterManga' => $maxChapterManga,
-                                                'minChapterManga' => $minChapterManga,
+                                                'maxChapterManga' => $maxChapterManga[0],
+                                                'minChapterManga' => $minChapterManga[0],
+                                                'idMaxChapterManga' => $idMaxChapterManga,
+                                                'idMinChapterManga' => $idMinChapterManga,
                                                 'footerChapter' => $footerChapter,
                                             ]);
     }
@@ -179,7 +198,7 @@ class MangaController extends Controller
         $page_title = "Daftar Komik";
         $web_description = "Daftar Komik terlengkap yang tersedia di Mangajaya, semua berbahasa Indonesia dengan kualitas gambar HD.";
 
-        $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W');
+        $char = array('.', '+', '0', '1', '2', '4', '6', '7', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
         foreach ($char as $abjad) {
             $manga[] = DB::table('manga')->join('detail_manga', 'manga.id_manga', '=', 'detail_manga.id_manga')
                                          ->where('nama_manga', 'like', $abjad.'%')

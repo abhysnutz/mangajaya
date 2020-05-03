@@ -107,24 +107,24 @@
                 <!-- LOOPING HOT MANGA -->
                 @foreach($hotManga as $hotMangaList)
                     <div class="grd2 grd3">
-                        <a class="popunder" href="{{url('/manga/'.$hotMangaList->slug_manga)}}" title="Baca Manhua Martial Peak">
+                        <a class="popunder" href="{{url('/manga/'.$hotMangaList[0]->slug_manga)}}" title="Baca Manhua Martial Peak">
                             <div class="imr">
-                                <div class="vw @if($hotMangaList->berwarna == 1) Warna @endif Hot"> @if($hotMangaList->berwarna == 1) Warna @endif</div> 
-                                <img src="{{url('/storage/komik/sampul_detail/'.$hotMangaList->slug_manga.'.jpg')}}" class="rd sd" alt="Komik {{$hotMangaList->nama_manga}} Bahasa Indonesia">
+                                <div class="vw @if($hotMangaList[0]->berwarna == 1) Warna @endif Hot"> @if($hotMangaList[0]->berwarna == 1) Warna @endif</div> 
+                                <img src="{{url('/storage/komik/sampul_detail/'.$hotMangaList[0]->slug_manga.'.jpg')}}" class="rd sd" alt="Komik {{$hotMangaList[0]->nama_manga}} Bahasa Indonesia">
                                 <div class="tpe1_inf"> 
-                                    <b>{{$hotMangaList->konsep_cerita}}</b>
+                                    <b>{{$hotMangaList[0]->konsep_cerita}}</b>
                                 </div>
-                                <div class="{{$hotMangaList->jenis_manga}}"></div>
+                                <div class="{{$hotMangaList[0]->jenis_manga}}"></div>
                             </div>
-                            <h3> {{$hotMangaList->nama_manga}} </h3> 
+                            <h3> {{$hotMangaList[0]->nama_manga}} </h3> 
                         </a> 
                         <span>
-                            {{$hotMangaList->views}} x • 
+                            {{$hotMangaList[0]->views}} x • 
                             {{ \Carbon\Carbon::parse($mangaList->created_at)->diffForHumans() }}
                         </span> 
-                        <a class="popunder" href="{{url('/manga/'.$hotMangaList->slug_manga.'/'.str_replace('.0', '', $hotMangaList->episode_chapter))}}" title="{{$hotMangaList->nama_manga}} {{$hotMangaList->judul_chapter}} Bahasa Indonesia">
+                        <a class="popunder" href="{{url('/manga/'.$hotMangaList[0]->slug_manga.'/'.str_replace('.0', '', $hotMangaList[0]->episode_chapter))}}" title="{{$hotMangaList[0]->nama_manga}} {{$hotMangaList[0]->judul_chapter}} Bahasa Indonesia">
                             <span>
-                                <b>{{$hotMangaList->judul_chapter}}</b>
+                                <b>{{$hotMangaList[0]->judul_chapter}}</b>
                             </span>
                         </a> 
                     </div>

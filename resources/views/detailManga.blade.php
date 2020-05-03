@@ -112,15 +112,15 @@
             <h2> Baca {{$detailManga->jenis_manga}} {{$detailManga->nama_manga}} </h2>
             <div class="new">
                 <div class="new1 sd rd"> 
-                    <a href="{{url('manga/'.$detailManga->slug_manga.'/'.str_replace('.0', '', $minChapterManga))}}" title="{{$detailManga->nama_manga}} Chapter {{str_replace('.0', '', $minChapterManga)}}" target="_blank">
+                    <a href="{{url('manga/'.$detailManga->slug_manga.'/'.str_replace('.0', '', $minChapterManga->episode_chapter))}}" title="{{$detailManga->nama_manga}} Chapter {{str_replace('.0', '', $minChapterManga->episode_chapter)}}" target="_blank">
                         <span>Chapter Awal </span>
-                        <span>Chapter {{str_replace('.0', '', $minChapterManga)}}</span>
+                        <span>Chapter {{str_replace('.0', '', $minChapterManga->episode_chapter)}}</span>
                     </a> 
                 </div>
                 <div class="new1 sd rd"> 
-                    <a href="{{url('manga/'.$detailManga->slug_manga.'/'.str_replace('.0', '', $maxChapterManga))}}" title="{{$detailManga->nama_manga}} Chapter {{str_replace('.0', '', $maxChapterManga)}}" target="_blank">
+                    <a href="{{url('manga/'.$detailManga->slug_manga.'/'.str_replace('.0', '', $maxChapterManga->episode_chapter))}}" title="{{$detailManga->nama_manga}} Chapter {{str_replace('.0', '', $maxChapterManga->episode_chapter)}}" target="_blank">
                         <span>Chapter Baru </span>
-                        <span>Chapter {{str_replace('.0', '', $maxChapterManga)}}</span>
+                        <span>Chapter {{str_replace('.0', '', $maxChapterManga->episode_chapter)}}</span>
                     </a> 
                 </div> 
                 <b>
@@ -130,7 +130,7 @@
             <p> Cara baca {{$detailManga->jenis_manga}} online {{$detailManga->nama_manga}} Indo adalah dari @if( $detailManga->jenis_manga == 'Manga') kanan ke kiri @else kiri ke kanan @endif. </p>
 
             <!-- SHARE -->
-            <p style="float: left; width: 100%;text-align: center;color: #4163b2;font-weight: 600;">Share komik ini = bantu cepat update!</p>
+            <!-- <p style="float: left; width: 100%;text-align: center;color: #4163b2;font-weight: 600;">Share komik ini = bantu cepat update!</p>
             <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Baca One Piece di Komiku!&amp;url=https://komiku.co.id/manga/one-piece/" target="_blank" rel="noopener nofollow" aria-label="Share on Twitter">
                 <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
                     <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--normal">
@@ -148,7 +148,7 @@
                         </svg>
                     </div>Share WhatsApp</div>
                 </div>
-            </a>
+            </a> -->
             <table class="chapter">
                 <tbody class="_3Rsjq" data-test="chapter-table">
                     <tr>
@@ -222,7 +222,7 @@
                         <h4> {{$similarMangaList->nama_manga}} </h4> 
                     </a>
                     <p>                            
-                        {{ explode('</li>', explode('<li>', $similarManga[2]->sinopsis)[1])[0] }}
+                        {{ explode('</li>', explode('<li>', $similarMangaList->sinopsis)[1])[0] }}
                     </p>
                 </div>
             @endforeach

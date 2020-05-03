@@ -108,33 +108,11 @@ class HomeController extends Controller
                                     ]);
     }
 
-    // TRENDING
-    public function trending(){
-        $page_title = "Komik Populer 2020 (Trending)";
-        $web_description = "Baca Komik Populer di tahun 2020 di Komiku. Manga, Manhwa, dan Manhua diurutkan berdasarkan jumlah pembaca di Komikjaya";
-
-        $mangaTrending = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
-                                           ->join('other', 'other.id_manga', '=', 'manga.id_manga')
-                                           ->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
-                                           ->orderBy('views_chapter', 'DESC')
-                                           ->limit(100)
-                                           ->get();
-
-        // echo "<pre>";
-        // var_dump($mangaTrending);
-        // echo "</pre>";
-        return view('trending')->with([
-                                        'mangaTrending' => $mangaTrending,
-                                        'page_title' => $page_title,
-                                        'web_description' => $web_description,
-                                        ]);
-    }
-
     // SEARCHING
     public function searching(Request $request){
 
-		// menangkap data pencarian
-		$cari = $request->cari;
+    // menangkap data pencarian
+    $cari = $request->cari;
 
         $mangaSearch = DB::table('manga')->join('detail_manga', 'detail_manga.id_manga', '=', 'manga.id_manga')
                                          ->where('nama_manga','like',"%".$cari."%")
@@ -143,11 +121,11 @@ class HomeController extends Controller
         $page_title = "Hasil Pencarian ".$cari;
         $web_description = "Pencarian Hasil Pencarian ".$cari;
         
-		return view('searching')->with([    
+    return view('searching')->with([    
                                             'page_title' => $page_title,
                                             'web_description' => $web_description,
                                             'cari' => $cari,
                                             'mangaSearch' => $mangaSearch,
                                         ]);
-	}
+  }
 }

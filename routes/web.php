@@ -15,19 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 // HOME
 Route::get('/', 'HomeController@index')->name('home');
+// TRENDING LANDING PAGE
+Route::get('/trending', 'HomeController@trending');
 
-// TRUNCATE
-Route::get('trun', function(){
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('detail_manga')->truncate();
-    DB::table('spoiler_image')->truncate();
-    DB::table('chapter')->truncate();
-    DB::table('gambar')->truncate();
-    DB::table('other')->truncate();
-    DB::table('detail_kategori')->truncate();
-    DB::table('manga')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-});
+// // TRUNCATE
+// Route::get('trun', function(){
+//     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//     DB::table('detail_manga')->truncate();
+//     DB::table('spoiler_image')->truncate();
+//     DB::table('chapter')->truncate();
+//     DB::table('gambar')->truncate();
+//     DB::table('other')->truncate();
+//     DB::table('detail_kategori')->truncate();
+//     DB::table('manga')->truncate();
+//     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+// });
 
 
 // GRAB
@@ -36,7 +38,8 @@ Route::get('trun', function(){
 Route::get('/grab/newmanga/{page?}', 'GrabController@newManga');
 // melakukan grab pada halaman home komiku
 Route::get('/grab/homemanga/', 'GrabController@homeManga');
-
+// melakukan grab pada views chapter trending page
+Route::get('/grab/trendingmanga/', 'GrabController@trendingManga');
 
 // GRAB MANUAL
 // melakukan grab pada daftar manga (DB MANGA)
@@ -118,6 +121,7 @@ Route::get('/category/manga', 'CategoryController@detailCategoryManga')->name('c
 Route::get('/category/manhua', 'CategoryController@detailCategoryManhua')->name('categoryManhua');
 // MANHWA CATEGORY
 Route::get('/category/manhwa', 'CategoryController@detailCategoryManhwa')->name('categoryManhwa');
+
 
 // SEARCHING
 Route::get('/searching', 'HomeController@searching');

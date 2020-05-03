@@ -177,7 +177,9 @@ class GrabController extends Controller
                                                     'judul_chapter' => 'Chapter '.$episodeChapter[$i], 
                                                     'created_at' => now(), 
                                                     'updated_at' => now(), 
-                                                    'id_manga' => $data_manga_exists[$i][0]->id_manga
+                                                    'id_manga' => $data_manga_exists[$i][0]->id_manga,
+                                                    'link_chapter' => '-',
+                                                    
                                                 ]);
 
                     DB::table('manga')->where('id_manga', $data_manga_exists[$i][0]->id_manga)
@@ -390,7 +392,8 @@ class GrabController extends Controller
                                                     'judul_chapter' => 'Chapter '.$episodeChapter[$i], 
                                                     'created_at' => now(), 
                                                     'updated_at' => now(), 
-                                                    'id_manga' => $data_manga_exists[$i][0]->id_manga
+                                                    'id_manga' => $data_manga_exists[$i][0]->id_manga,
+                                                    'link_chapter' => '-',
                                                 ]);
 
                     DB::table('manga')->where('id_manga', $data_manga_exists[$i][0]->id_manga)
@@ -710,7 +713,7 @@ class GrabController extends Controller
         }
     }
 
-    // GRAB GAMBAR SEMUA (HANYA 1)
+    // GRAB GAMBAR SEMUA (BERDASARKAN ID MANGA DARI AWAL AMPE AKHIR)
     public function daftarGambarSemua($awal, $akhir){
 
         for ($i=$awal; $i <= $akhir; $i++) { 
@@ -864,7 +867,6 @@ class GrabController extends Controller
             return $node->attr("data-src");
         });       
         
-        // echo $i. " ".$mangalist[0]->slug_manga. " ".$url."<br>";
         
         foreach ($daftarImage as $key => $daftarImageList) {
            $id = $key + 1;
@@ -919,7 +921,6 @@ class GrabController extends Controller
                                      ->update(['berwarna' => 1]);
                 echo $namaManga[0]->id_manga."<br>";
             }
-            
         }
     }
 
@@ -961,6 +962,48 @@ class GrabController extends Controller
                 DB::table('other')->where('id_other_manga', $namaManga[0]->id_manga)
                                      ->update(['hot' => 1]);
                 echo $namaManga[0]->id_manga."<br>";
+            }
+        }
+    }
+
+
+    public function trendingManga(){
+        $crawler = Goutte::request('GET', 'https://komiku.co.id/trending');
+
+        $title = $crawler->filter('h3')->each(function ($node) {
+            return $node->text();
+        });
+
+        $trendingManga = $crawler->filter('h3')->each(function ($node) {
+            return $node->html();
+        });
+
+        $trendingMangaSpan = $crawler->filter('.kan span')->each(function ($node) {
+            return $node->html();
+        });
+        
+
+        for ($i=0; $i < 100; $i++) { 
+            $nama_manga[$i] = trim(explode('Chapter', $trendingManga[$i])[0]);
+            $chapter[$i] = trim(explode('Chapter', $trendingManga[$i])[1]);
+            $views[$i] = preg_replace("/[^0-9]/", "", explode('x', $trendingMangaSpan[$i])[0]);
+        }
+
+        for ($i=0; $i < 100; $i++) { 
+            $mangaExists[$i] = DB::table('manga')->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                                 ->where('nama_manga', $nama_manga[$i])
+                                                 ->where('episode_chapter', $chapter[$i])
+                                                 ->exists();
+
+            if($mangaExists[$i] != NULL){
+                $id_chapter[$i] = DB::table('manga')->join('chapter', 'chapter.id_manga', '=', 'manga.id_manga')
+                                                    ->select('chapter.id_chapter')
+                                                    ->where('nama_manga', $nama_manga[$i])
+                                                    ->where('episode_chapter', $chapter[$i])
+                                                    ->get();
+                
+                DB::table('chapter')->where('id_chapter', $id_chapter[$i][0]->id_chapter)
+                                    ->update(['views_chapter' => $views[$i]]);
             }
         }
     }
